@@ -1,22 +1,9 @@
-name: Install Node dependencies
-description: GitHub Action for installing package.json dependencies. npm, Yarn and pnpm supported.
+name: Sync package.json with repo metadata
+description: GitHub Action that syncs package.json with the repository metadata (description, homepage, topics/keywords).
 author: Jaid
-inputs:
-  nodeEnv:
-    default: development
-    description: NODE_ENV setting for installing execution (affects the amount of dependencies installed, but I would recommend keeping development in any case).
-    required: false
-  packageManager:
-    default: auto
-    description: Can be "npm", "yarn", "pnpm" or "auto". "auto" will determine the package manager by looking into the repo's files. This is very accurate, so you normally don't want to change this.
-    required: false
-  skipIfNodeModulesExists:
-    default: "false"
-    description: If true and node_modules folder already exists, this action will be skipped assuming npm install is not required.
-    required: false
 runs:
   using: node12
   main: build/index.js
 branding:
-  icon: download
+  icon: refresh-cw
   color: green
