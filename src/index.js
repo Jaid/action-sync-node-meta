@@ -2,9 +2,10 @@ import fsp from "@absolunet/fsp"
 import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/core"
 import {context} from "@actions/github"
 import CommitManager from "commit-from-action"
+import detectIndent from "detect-indent"
 import path from "path"
 import purdy from "purdy"
-import readFileJson from "read-file-json"
+import readFileString from "read-file-string"
 import zahl from "zahl"
 
 import DescriptionProperty from "lib/DescriptionProperty"
@@ -14,11 +15,12 @@ import pullBody from "./pullBody.hbs"
 
 async function main() {
   const pkgFile = path.resolve("package.json")
-  let pkg = await readFileJson(pkgFile)
-  if (!pkg) {
+  const pkgString = await readFileString(pkgFile)
+  if (!pkgString) {
     info("No package.json found, skipping")
     return
   }
+  let pkg = JSON.parse(pkgString)
   debug(`Loaded ${zahl(pkg, "field")} from ${pkgFile}`)
   if (!context?.payload?.repository) {
     throw new Error("Could not fetch repository info from context.payload.repository")
@@ -73,7 +75,9 @@ async function main() {
     endGroup()
   }
   if (changes.length) {
-    await fsp.outputJson(pkgFile, pkg, {space: 2})
+    const indent = detectIndent(pkgString)
+    const outputJson = JSON.stringify(pkg, null, indent)
+    await fsp.outputFile(pkgFile, outputJson)
     const prefix = getInput("commitMessagePrefix") || ""
     const changesString = changes.map(change => change.pkgKey).join(", ")
     await commitManager.push(`${prefix}Updated package.json[${changesString}]`)
