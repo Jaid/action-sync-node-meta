@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v1.4.1
         with:
           node-version: "13.9.0"
-      - name: npm install
-        uses: jaid/action-sync-node-meta@v1.2.1
+      - name: Jaid/action-sync-node-meta
+        uses: jaid/action-sync-node-meta@v1.0.0
+        token: ${{ secrets.GITHUB_TOKEN }}
 ```
