@@ -61,7 +61,8 @@ export default class Property {
    * @return {*}
    */
   getPkgValue() {
-    return this.pkg(this.getPkgKey())
+    const key = this.getPkgKey()
+    return this.pkg[key]
   }
 
   /**
@@ -77,7 +78,7 @@ export default class Property {
    */
   getTitle() {
     const key = this.getPkgKey()
-    return upperCaseFirst[key]
+    return upperCaseFirst(key)
   }
 
 }
