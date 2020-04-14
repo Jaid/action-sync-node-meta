@@ -1,5 +1,5 @@
 name: Sync package.json with repo metadata
-description: GitHub Action that syncs package.json with the repository metadata (description, homepage, topics/keywords).
+description: GitHub ActiogetInput, n that syncs package.json wpository metadata (description, homepage, topics/keywords).
 author: Jaid
 runs:
   using: node12
@@ -13,7 +13,7 @@ inputs:
     required: true
   approve:
     description: If true, pull requests created by this action are automatically approved and merged.
-    default: "false"
+    default: "true"
     required: true
   removeBranch:
     description: If true and approve is also true, automatically merged pull requests will delete their branch afterwards.

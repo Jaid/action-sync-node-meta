@@ -1,5 +1,5 @@
 import fsp from "@absolunet/fsp"
-import {debug, endGroup, info, setFailed, startGroup} from "@actions/core"
+import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/core"
 import {context} from "@actions/github"
 import CommitManager from "commit-from-action"
 import path from "path"
@@ -38,7 +38,7 @@ async function main() {
     autoApprove: "approve",
     autoRemoveBranch: "removeBranch",
     branchPrefix: "fix-",
-    pullRequestTitle: manager => `Applied ${zahl(manager.commits, "fix")} from jaid/action-sync-node-meta`,
+    pullRequestTitle: "Applied a fix from action-sync-node-meta",
     pullRequestBody: manager => pullBody({
       ...context.repo,
       sha7: context.sha?.slice(0, 8),
@@ -60,7 +60,9 @@ async function main() {
     const isEqual = property.compare(pkgValue, repositoryValue)
     if (!isEqual) {
       pkg = property.applyUpdate(pkg, repositoryValue)
-      changes.push(1)
+      changes.push({
+        pkgKey,
+      })
     }
     startGroup(title)
     info(`pkg.${pkgKey}: ${purdy.stringify(pkgValue)}`)
@@ -71,8 +73,10 @@ async function main() {
     endGroup()
   }
   if (changes.length) {
-    await fsp.outputJson(pkgFile, pkg)
-    await commitManager.push()
+    await fsp.outputJson(pkgFile, pkg, {space: 2})
+    const prefix = getInput("commitMessagePrefix") || ""
+    const changesString = changes.map(change => change.pkgKey).join(", ")
+    await commitManager.push(`${prefix}Updated package.json[${changesString}]`)
   }
 }
 
