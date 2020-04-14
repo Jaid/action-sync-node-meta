@@ -1,6 +1,8 @@
 import {debug, endGroup, info, setFailed, startGroup} from "@actions/core"
 import {context} from "@actions/github"
+import CommitManager from "commit-from-action"
 import path from "path"
+import purdy from "purdy"
 import readFileJson from "read-file-json"
 import zahl from "zahl"
 
@@ -30,9 +32,16 @@ async function main() {
     new HomepageProperty(constructorContext),
   ]
   for (const property of properties) {
-    startGroup(property.getTitle())
-    info(`pkg[${property.getPkgKey()}]: ${JSON.stringify(property.getPkgValue())}`)
-    info(`repository[${property.getRepositoryKey()}]: ${JSON.stringify(property.getRepositoryValue())}`)
+    const title = property.getTitle()
+    const pkgKey = property.getPkgKey()
+    const pkgValue = property.getPkgValue()
+    const repositoryKey = property.getRepositoryKey()
+    const repositoryValue = property.getRepositoryValue()
+    const isEqual = property.compare(pkgValue, repositoryValue)
+    startGroup(title)
+    info(`pkg.${pkgKey}: ${purdy.stringify(pkgValue)}`)
+    info(`repository.${repositoryKey}: ${purdy.stringify(repositoryValue)}`)
+    info(`They are not equal! Updating pkg.${property.getPkgKey()} value.`)
     endGroup()
   }
 }

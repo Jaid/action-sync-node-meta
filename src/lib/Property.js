@@ -4,6 +4,7 @@
  * @prop {Pkg} pkg
  */
 
+import {isEqual} from "lodash"
 import {upperCaseFirst} from "upper-case-first"
 
 /**
@@ -79,6 +80,14 @@ export default class Property {
   getTitle() {
     const key = this.getPkgKey()
     return upperCaseFirst(key)
+  }
+
+  /**
+   * @param {*} pkgValue
+   * @param {*} repositoryValue
+   */
+  compare(pkgValue, repositoryValue) {
+    return isEqual(pkgValue, repositoryValue)
   }
 
 }
