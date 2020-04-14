@@ -8,7 +8,7 @@ async function main() {
     info("No package.json found, skipping")
     return
   }
-  info(JSON.stringify(context.payload))
+  info(JSON.stringify(context.payload.repository.description))
 }
 
 main().catch(error => {
