@@ -1,7 +1,12 @@
-import {setFailed} from "@actions/core"
+import {info, setFailed} from "@actions/core"
+import readFileJson from "read-file-json"
 
 async function main() {
-  console.log("ABC")
+  const pkg = await readFileJson("package.json")
+  if (!pkg) {
+    info("No package.json found, skipping")
+    return
+  }
 }
 
 main().catch(error => {

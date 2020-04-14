@@ -11,7 +11,8 @@
     "@babel/runtime": "^7.9.2",
     "get-boolean-action-input": "^1.0.2",
     "guess-package-manager": "^1.1.3",
-    "has-content": "^1.1.1"
+    "has-content": "^1.1.1",
+    "read-file-json": "^1.0.2"
   },
   "devDependencies": {
     "acorn": "^7.1.1",
