@@ -91,6 +91,12 @@ jobs:
 <td>true</td>
 <td>If true, package.json[homepage] will be synced with GitHub repository homepage.</td>
 </tr>
+<tr>
+<td>syncKeywords</td>
+<td></td>
+<td>true</td>
+<td>If true, package.json[keywords] will be synced with GitHub repository topics.</td>
+</tr>
 </table>
 
 
