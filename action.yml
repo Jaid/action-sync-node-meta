@@ -31,3 +31,7 @@ inputs:
     description: If true, package.json[homepage] will be synced with GitHub repository homepage.
     default: "true"
     required: false
+  syncKeywords:
+    description: If true, package.json[keywords] will be synced with GitHub repository topics.
+    default: "true"
+    required: false
