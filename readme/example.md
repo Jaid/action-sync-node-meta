@@ -2,7 +2,7 @@ Example workflow that runs whenever commits are pushed on branch `master`.
 
 `.github/workflows/example.yml`
 ```yaml
-name: Try installing Node dependencies
+name: Sync package.json with repository data
 on:
   push:
     branches: [master]
