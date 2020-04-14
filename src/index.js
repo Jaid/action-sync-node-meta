@@ -11,6 +11,7 @@ import zahl from "zahl"
 
 import DescriptionProperty from "lib/DescriptionProperty"
 import HomepageProperty from "lib/HomepageProperty"
+import KeywordsProperty from "lib/KeywordsProperty"
 
 import pullBody from "./pullBody.hbs"
 
@@ -44,6 +45,7 @@ async function main() {
   const inputKeysForProperties = {
     syncDescription: DescriptionProperty,
     syncHomepage: HomepageProperty,
+    syncKeywords: KeywordsProperty,
   }
   for (const [inputKey, PropertyClass] of Object.entries(inputKeysForProperties)) {
     const isIncluded = getBooleanActionInput(inputKey)

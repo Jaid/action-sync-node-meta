@@ -1,6 +1,6 @@
 import Property from "lib/Property"
 
-export default class HomepageProperty extends Property {
+export default class KeywordsProperty extends Property {
 
   getPkgKey() {
     return "homepage"
