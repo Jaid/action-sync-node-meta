@@ -16,7 +16,7 @@ import KeywordsProperty from "lib/KeywordsProperty"
 import pullBody from "./pullBody.hbs"
 
 const octokit = new GitHub(getInput("githubToken", {required: true}), {
-  previews: ["mercy"],
+  previews: ["mercy"], // mercy preview gives us topics
 })
 
 async function main() {
