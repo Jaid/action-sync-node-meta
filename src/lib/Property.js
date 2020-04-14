@@ -4,6 +4,7 @@
  * @prop {Pkg} pkg
  */
 
+import immer from "immer"
 import {isEqual} from "lodash"
 import {upperCaseFirst} from "upper-case-first"
 
@@ -88,6 +89,18 @@ export default class Property {
    */
   compare(pkgValue, repositoryValue) {
     return isEqual(pkgValue, repositoryValue)
+  }
+
+  /**
+   * @param {Pkg} pkgBefore
+   * @param {Object} repositoryValue
+   * @return {Pkg}
+   */
+  applyUpdate(pkgBefore, repositoryValue) {
+    const pkgKey = this.getPkgKey()
+    return immer(pkgBefore, state => {
+      state[pkgKey] = repositoryValue
+    })
   }
 
 }

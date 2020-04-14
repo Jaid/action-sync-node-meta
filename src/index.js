@@ -1,3 +1,4 @@
+import fsp from "@absolunet/fsp"
 import {debug, endGroup, info, setFailed, startGroup} from "@actions/core"
 import {context} from "@actions/github"
 import CommitManager from "commit-from-action"
@@ -13,7 +14,7 @@ import pullBody from "./pullBody.hbs"
 
 async function main() {
   const pkgFile = path.resolve("package.json")
-  const pkg = await readFileJson("package.json")
+  let pkg = await readFileJson(pkgFile)
   if (!pkg) {
     info("No package.json found, skipping")
     return
@@ -50,6 +51,7 @@ async function main() {
     }),
     mergeMessage: manager => `Automatically merged Node metadata update from #${manager.pullNumber}`,
   })
+  const changes = []
   for (const property of properties) {
     const title = property.getTitle()
     const pkgKey = property.getPkgKey()
@@ -57,6 +59,10 @@ async function main() {
     const repositoryKey = property.getRepositoryKey()
     const repositoryValue = property.getRepositoryValue()
     const isEqual = property.compare(pkgValue, repositoryValue)
+    if (!isEqual) {
+      pkg = property.applyUpdate(pkg, repositoryValue)
+      changes.push(1)
+    }
     startGroup(title)
     info(`pkg.${pkgKey}: ${purdy.stringify(pkgValue)}`)
     info(`repository.${repositoryKey}: ${purdy.stringify(repositoryValue)}`)
@@ -64,6 +70,10 @@ async function main() {
       info(`They are not equal! Updating pkg.${property.getPkgKey()} value.`)
     }
     endGroup()
+  }
+  if (changes.length) {
+    await fsp.outputJson(pkgFile, pkg)
+    await commitManager.push()
   }
 }
 
