@@ -11,6 +11,9 @@ async function main() {
     info("No package.json found, skipping")
     return
   }
+  if (!context?.payload?.repository) {
+    throw new Error("Could not fetch repository info from context.payload.repository")
+  }
   const constructorContext = {
     repository: context.payload.repository,
     pkg,
