@@ -1,4 +1,5 @@
 import {info, setFailed} from "@actions/core"
+import {context} from "@actions/github"
 import readFileJson from "read-file-json"
 
 async function main() {
@@ -7,6 +8,7 @@ async function main() {
     info("No package.json found, skipping")
     return
   }
+  info(context.payload)
 }
 
 main().catch(error => {
