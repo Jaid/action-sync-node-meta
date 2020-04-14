@@ -27,7 +27,7 @@ import {upperCaseFirst} from "upper-case-first"
  */
 
 /**
- * @typedef {Object} pkg
+ * @typedef {Object} Pkg
  * @prop {string} homepage
  * @prop {string} description
  * @prop {string[]} keywords

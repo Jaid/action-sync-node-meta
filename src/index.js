@@ -5,6 +5,8 @@ import readFileJson from "read-file-json"
 import DescriptionProperty from "lib/DescriptionProperty"
 import HomepageProperty from "lib/HomepageProperty"
 
+info(JSON.stringify(context, null, 2))
+
 async function main() {
   const pkg = await readFileJson("package.json")
   if (!pkg) {
@@ -18,7 +20,6 @@ async function main() {
     repository: context.payload.repository,
     pkg,
   }
-  info(JSON.stringify(constructorContext))
   /**
    * @type {import("lib/Property").default[]}
    */
