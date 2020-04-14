@@ -1,5 +1,5 @@
-name: Sync package.json with repo metadata
-description: GitHub ActiogetInput, n that syncs package.json wpository metadata (description, homepage, topics/keywords).
+name: Sync package.json with repo info
+description: GitHub Action that syncs package.json wpository metadata (description, homepage, topics/keywords).
 author: Jaid
 runs:
   using: node12
