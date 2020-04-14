@@ -37,7 +37,6 @@ async function main() {
   const commitManager = new CommitManager({
     autoApprove: "approve",
     autoRemoveBranch: "removeBranch",
-    githubTokenInputName: "token",
     branchPrefix: "fix-",
     pullRequestTitle: manager => `Applied ${zahl(manager.commits, "fix")} from jaid/action-sync-node-meta`,
     pullRequestBody: manager => pullBody({
