@@ -7,7 +7,7 @@
 **GitHub Action that syncs package.json with the repository metadata (description, homepage, topics/keywords).**
 
 
-This is usually needed to prepare for other steps in a GitHub Actions workflow.
+
 
 
 
@@ -19,7 +19,7 @@ Example workflow that runs whenever commits are pushed on branch `master`.
 
 `.github/workflows/example.yml`
 ```yaml
-name: Try installing Node dependencies
+name: Sync package.json with repository data
 on:
   push:
     branches: [master]
@@ -33,8 +33,9 @@ jobs:
         uses: actions/setup-node@v1.4.1
         with:
           node-version: "13.9.0"
-      - name: npm install
-        uses: jaid/action-sync-node-meta@v1.2.1
+      - name: Jaid/action-sync-node-meta
+        uses: jaid/action-sync-node-meta@v1.0.0
+        token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 
