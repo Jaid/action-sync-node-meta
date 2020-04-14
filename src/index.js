@@ -1,4 +1,4 @@
-import {info, setFailed} from "@actions/core"
+import {debug, info, setFailed} from "@actions/core"
 import {context} from "@actions/github"
 import readFileJson from "read-file-json"
 
