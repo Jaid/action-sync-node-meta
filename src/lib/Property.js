@@ -1,12 +1,12 @@
+import immer from "immer"
+import {isEqual} from "lodash"
+import {upperCaseFirst} from "upper-case-first"
+
 /**
  * @typedef {Object} ConstructorContext
  * @prop {Repository} repository
  * @prop {Pkg} pkg
  */
-
-import immer from "immer"
-import {isEqual} from "lodash"
-import {upperCaseFirst} from "upper-case-first"
 
 /**
  * @typedef {Object} Repository

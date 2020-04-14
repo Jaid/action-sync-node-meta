@@ -19,15 +19,11 @@ const octokit = new GitHub(getInput("githubToken", {required: true}), {
 })
 
 async function main() {
-  const repositoryResponse = await octokit.repos.get({
-    ...context.repo,
-  })
-  console.log(purdy(repositoryResponse, {
-    indent: 2,
-    depth: 4,
-  }))
   const pkgFile = path.resolve("package.json")
-  const pkgString = await readFileString(pkgFile)
+  const [repositoryResponse, pkgString] = await Promise.all([
+    octokit.repos.get(context.repo),
+    readFileString(pkgFile),
+  ])
   if (!pkgString) {
     info("No package.json found, skipping")
     return
@@ -38,7 +34,7 @@ async function main() {
     throw new Error("Could not fetch repository info from context.payload.repository")
   }
   const constructorContext = {
-    repository: context.payload.repository,
+    repository: repositoryResponse.data,
     pkg,
   }
   /**
