@@ -75,7 +75,7 @@ async function main() {
     endGroup()
   }
   if (changes.length) {
-    const indent = detectIndent(pkgString) || "    "
+    const indent = detectIndent(pkgString).indent || "    "
     const outputJson = JSON.stringify(pkg, null, indent)
     await fsp.outputFile(pkgFile, outputJson)
     const prefix = getInput("commitMessagePrefix") || ""
