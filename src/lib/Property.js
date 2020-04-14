@@ -68,14 +68,16 @@ export default class Property {
    * @return {*}
    */
   getRepositoryValue() {
-    return this.repository(this.getRepositoryKey())
+    const key = this.getRepositoryKey()
+    return this.repository[key]
   }
 
   /**
    * @return {string}
    */
   getTitle() {
-    return upperCaseFirst(this.getPkgKey())
+    const key = this.getPkgKey()
+    return upperCaseFirst[key]
   }
 
 }
