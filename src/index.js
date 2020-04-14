@@ -14,8 +14,6 @@ import HomepageProperty from "lib/HomepageProperty"
 
 import pullBody from "./pullBody.hbs"
 
-console.log(purdy.stringify(context, {indent: 2}))
-
 async function main() {
   const pkgFile = path.resolve("package.json")
   const pkgString = await readFileString(pkgFile)
