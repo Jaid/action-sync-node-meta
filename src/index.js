@@ -18,6 +18,7 @@ async function main() {
     repository: context.payload.repository,
     pkg,
   }
+  info(JSON.stringify(constructorContext))
   /**
    * @type {import("lib/Property").default[]}
    */
