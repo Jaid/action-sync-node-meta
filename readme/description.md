@@ -1,3 +1,3 @@
 There are values that are meant to be the same. Why not automatically keep them synchronized?
 
-![Banner](./banner.jpg)
+![Banner](readme/banner.jpg)
