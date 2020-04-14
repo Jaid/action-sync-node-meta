@@ -7,7 +7,7 @@
 **GitHub Action that syncs package.json with the repository metadata (description, homepage, topics/keywords).**
 
 
-
+There are values that are meant to be the same. Why not automatically keep them synchronized?
 
 
 
@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
-        uses: jaid/action-sync-node-meta@v1.1.0
+        uses: jaid/action-sync-node-meta@v1.0.0
         token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
