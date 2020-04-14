@@ -1,6 +1,6 @@
 import fsp from "@absolunet/fsp"
 import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/core"
-import {context} from "@actions/github"
+import {context, GitHub} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
 import getBooleanActionInput from "get-boolean-action-input"
@@ -14,7 +14,18 @@ import HomepageProperty from "lib/HomepageProperty"
 
 import pullBody from "./pullBody.hbs"
 
+const octokit = new GitHub(getInput("githubToken", {required: true}), {
+  previews: ["mercy"],
+})
+
 async function main() {
+  const repositoryResponse = await octokit.repos.get({
+    ...context.repo,
+  })
+  console.log(purdy(repositoryResponse, {
+    indent: 2,
+    depth: 4,
+  }))
   const pkgFile = path.resolve("package.json")
   const pkgString = await readFileString(pkgFile)
   if (!pkgString) {
