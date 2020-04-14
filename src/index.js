@@ -12,7 +12,7 @@ async function main() {
     return
   }
   const constructorContext = {
-    repository: context.repository,
+    repository: context.payload.repository,
     pkg,
   }
   /**
