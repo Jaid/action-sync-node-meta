@@ -7,6 +7,7 @@
     "@absolunet/fsp": "^1.6.2",
     "@actions/core": "^1.2.3",
     "@actions/exec": "^1.0.3",
+    "@actions/github": "^2.1.1",
     "@actions/io": "^1.0.2",
     "@babel/runtime": "^7.9.2",
     "get-boolean-action-input": "^1.0.2",
