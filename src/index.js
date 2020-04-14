@@ -3,6 +3,7 @@ import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/c
 import {context} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
+import getBooleanActionInput from "get-boolean-action-input"
 import path from "path"
 import purdy from "purdy"
 import readFileString from "read-file-string"
@@ -32,10 +33,20 @@ async function main() {
   /**
    * @type {import("lib/Property").default[]}
    */
-  const properties = [
-    new DescriptionProperty(constructorContext),
-    new HomepageProperty(constructorContext),
-  ]
+  const properties = []
+  const inputKeysForProperties = {
+    syncDescription: DescriptionProperty,
+    syncHomepage: HomepageProperty,
+  }
+  for (const [inputKey, PropertyClass] of Object.entries(inputKeysForProperties)) {
+    const isIncluded = getBooleanActionInput(inputKey)
+    if (isIncluded) {
+      properties.push(new PropertyClass(constructorContext))
+    }
+  }
+  if (properties.length === 0) {
+    throw new Error("None of the sync properties is enabled!")
+  }
   const commitManager = new CommitManager({
     autoApprove: "approve",
     autoRemoveBranch: "removeBranch",

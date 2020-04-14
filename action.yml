@@ -14,12 +14,20 @@ inputs:
   approve:
     description: If true, pull requests created by this action are automatically approved and merged.
     default: "true"
-    required: true
+    required: false
   removeBranch:
     description: If true and approve is also true, automatically merged pull requests will delete their branch afterwards.
     default: "true"
-    required: true
+    required: false
   commitMessagePrefix:
     description: Prefix string used in messages for automatically generated commits
     default: "autofix: "
-    required: true
+    required: false
+  syncDescription:
+    description: If true, package.json[description] will be synced with GitHub repository description.
+    default: "true"
+    required: false
+  syncHomepage:
+    description: If true, package.json[homepage] will be synced with GitHub repository homepage.
+    default: "true"
+    required: false
