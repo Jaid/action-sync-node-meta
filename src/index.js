@@ -41,7 +41,9 @@ async function main() {
     startGroup(title)
     info(`pkg.${pkgKey}: ${purdy.stringify(pkgValue)}`)
     info(`repository.${repositoryKey}: ${purdy.stringify(repositoryValue)}`)
-    info(`They are not equal! Updating pkg.${property.getPkgKey()} value.`)
+    if (!isEqual) {
+      info(`They are not equal! Updating pkg.${property.getPkgKey()} value.`)
+    }
     endGroup()
   }
 }
