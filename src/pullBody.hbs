@@ -1,4 +1,8 @@
+{{#if sha}}
 Hewwo! I am [{{actionRepo}}]({{actionPage}}) and run for commit [`{{sha7}}`](https://github.com/{{owner}}/{{repo}}/commit/{{sha}}/checks).
+{{else}}
+Hewwo! I am [{{actionRepo}}]({{actionPage}})!
+{{/if}}
 
 Here are updates I am intending to apply.
 {{#if autoApprove}}
