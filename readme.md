@@ -55,28 +55,40 @@ jobs:
 <th>Info</th>
 </tr>
 <tr>
-<td>approve</td>
-<td>*</td>
-<td>true</td>
-<td>If true, pull requests created by this action are automatically approved and merged.</td>
-</tr>
-<tr>
-<td>commitMessagePrefix</td>
-<td>*</td>
-<td>autofix: </td>
-<td>Prefix string used in messages for automatically generated commits</td>
-</tr>
-<tr>
 <td>githubToken</td>
 <td>*</td>
 <td></td>
 <td>Repository token for allowing the action to make commits.</td>
 </tr>
 <tr>
+<td>approve</td>
+<td></td>
+<td>true</td>
+<td>If true, pull requests created by this action are automatically approved and merged.</td>
+</tr>
+<tr>
+<td>commitMessagePrefix</td>
+<td></td>
+<td>autofix: </td>
+<td>Prefix string used in messages for automatically generated commits</td>
+</tr>
+<tr>
 <td>removeBranch</td>
-<td>*</td>
+<td></td>
 <td>true</td>
 <td>If true and approve is also true, automatically merged pull requests will delete their branch afterwards.</td>
+</tr>
+<tr>
+<td>syncDescription</td>
+<td></td>
+<td>true</td>
+<td>If true, package.json[description] will be synced with GitHub repository description.</td>
+</tr>
+<tr>
+<td>syncHomepage</td>
+<td></td>
+<td>true</td>
+<td>If true, package.json[homepage] will be synced with GitHub repository homepage.</td>
 </tr>
 </table>
 
