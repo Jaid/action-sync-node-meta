@@ -1,6 +1,7 @@
 import {debug, endGroup, info, setFailed, startGroup} from "@actions/core"
 import {context} from "@actions/github"
 import CommitManager from "commit-from-action"
+import getBooleanInput from "get-boolean-action-input"
 import path from "path"
 import purdy from "purdy"
 import readFileJson from "read-file-json"
@@ -8,6 +9,8 @@ import zahl from "zahl"
 
 import DescriptionProperty from "lib/DescriptionProperty"
 import HomepageProperty from "lib/HomepageProperty"
+
+import pullBody from "./pullBody.hbs"
 
 async function main() {
   const pkgFile = path.resolve("package.json")
@@ -31,6 +34,24 @@ async function main() {
     new DescriptionProperty(constructorContext),
     new HomepageProperty(constructorContext),
   ]
+  const autoApprove = getBooleanInput("approve")
+  const commitManager = new CommitManager({
+    autoApprove,
+    autoRemoveBranch: getBooleanInput("removeBranch", {required: true}),
+    githubTokenInputName: "token",
+    branchPrefix: "fix-",
+    pullRequestTitle: manager => `Applied ${zahl(manager.commits, "fix")} from jaid/action-sync-node-meta`,
+    pullRequestBody: manager => pullBody({
+      ...context.repo,
+      sha7: context.sha?.slice(0, 8),
+      autoApprove,
+      sha: context.sha,
+      actionRepo: "Jaid/action-sync-node-meta",
+      actionPage: "https://github.com/marketplace/actions/sync-node-meta",
+      branch: manager.branch,
+    }),
+    mergeMessage: manager => `Automatically merged boilerplate update from #${manager.pullNumber}`,
+  })
   for (const property of properties) {
     const title = property.getTitle()
     const pkgKey = property.getPkgKey()
