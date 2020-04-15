@@ -9,7 +9,7 @@ branding:
   color: green
 inputs:
   githubToken:
-    description: Repository token for allowing the action to make commits or change the repository info. Can be set from forwarding secrets.GITHUB_TOKEN in the workflow file.
+    description: Repository token for allowing the action to make commits or change the repository info. If direction is "overwrite-file", this input be set from forwarding secrets.GITHUB_TOKEN in the workflow file. If direction is "overwrite-github", a custom GitHub token has to be created.
     required: true
   approve:
     description: If true, pull requests created by this action are automatically approved and merged.
