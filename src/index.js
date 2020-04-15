@@ -4,6 +4,7 @@ import {context, GitHub} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
 import getBooleanActionInput from "get-boolean-action-input"
+import hasContent from "has-content"
 import path from "path"
 import purdy from "purdy"
 import readFileString from "read-file-string"
@@ -20,6 +21,10 @@ const octokit = new GitHub(getInput("githubToken", {required: true}), {
 })
 
 async function main() {
+  const syncingDirection = getInput("direction", {required: true}).toLowerCase()
+  // const overwriteFile = syncingDirection === "overwrite-file"
+  const overwriteFile = false
+  info(`Syncing direction: ${syncingDirection}`)
   const pkgFile = path.resolve("package.json")
   const [repositoryResponse, pkgString] = await Promise.all([
     octokit.repos.get(context.repo),
@@ -56,22 +61,6 @@ async function main() {
   if (properties.length === 0) {
     throw new Error("None of the sync properties is enabled!")
   }
-  const commitManager = new CommitManager({
-    autoApprove: "approve",
-    autoRemoveBranch: "removeBranch",
-    branchPrefix: "fix-",
-    pullRequestTitle: "Applied a fix from action-sync-node-meta",
-    pullRequestBody: manager => pullBody({
-      ...context.repo,
-      sha7: context.sha?.slice(0, 8),
-      autoApprove: manager.autoApprove,
-      sha: context.sha,
-      actionRepo: "Jaid/action-sync-node-meta",
-      actionPage: "https://github.com/marketplace/actions/sync-node-meta",
-      branch: manager.branch,
-    }),
-    mergeMessage: manager => `Automatically merged Node metadata update from #${manager.pullNumber}`,
-  })
   const changes = []
   for (const property of properties) {
     const title = property.getTitle()
@@ -81,10 +70,15 @@ async function main() {
     const repositoryValue = property.getRepositoryValue()
     const isEqual = property.compare(pkgValue, repositoryValue)
     if (!isEqual) {
-      pkg = property.applyUpdate(pkg, repositoryValue)
       changes.push({
         pkgKey,
+        repositoryKey,
       })
+      if (overwriteFile) {
+        pkg = property.applyPkgUpdate(pkg, repositoryValue)
+      } else {
+        await property.applyGithubUpdate(octokit, context.repo, pkgValue)
+      }
     }
     startGroup(title)
     info(`pkg.${pkgKey}: ${purdy.stringify(pkgValue)}`)
@@ -94,12 +88,28 @@ async function main() {
     }
     endGroup()
   }
-  if (changes.length) {
+  if (overwriteFile && hasContent(changes)) {
     const indent = detectIndent(pkgString).indent || "    "
     const outputJson = JSON.stringify(pkg, null, indent)
     await fsp.outputFile(pkgFile, outputJson)
     const prefix = getInput("commitMessagePrefix") || ""
     const changesString = changes.map(change => change.pkgKey).join(", ")
+    const commitManager = new CommitManager({
+      autoApprove: "approve",
+      autoRemoveBranch: "removeBranch",
+      branchPrefix: "fix-",
+      pullRequestTitle: "Applied a fix from action-sync-node-meta",
+      pullRequestBody: manager => pullBody({
+        ...context.repo,
+        sha7: context.sha?.slice(0, 8),
+        autoApprove: manager.autoApprove,
+        sha: context.sha,
+        actionRepo: "Jaid/action-sync-node-meta",
+        actionPage: "https://github.com/marketplace/actions/sync-node-meta",
+        branch: manager.branch,
+      }),
+      mergeMessage: manager => `Automatically merged Node metadata update from #${manager.pullNumber}`,
+    })
     await commitManager.push(`${prefix}Updated package.json[${changesString}]`)
   }
 }

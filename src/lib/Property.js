@@ -1,3 +1,4 @@
+import {info} from "@actions/core"
 import immer from "immer"
 import {isEqual} from "lodash"
 import {upperCaseFirst} from "upper-case-first"
@@ -93,14 +94,30 @@ export default class Property {
 
   /**
    * @param {Pkg} pkgBefore
-   * @param {Object} repositoryValue
+   * @param {*} repositoryValue
    * @return {Pkg}
    */
-  applyUpdate(pkgBefore, repositoryValue) {
+  applyPkgUpdate(pkgBefore, repositoryValue) {
     const pkgKey = this.getPkgKey()
     return immer(pkgBefore, state => {
       state[pkgKey] = repositoryValue
     })
+  }
+
+  /**
+   * @param {import("@octokit/rest").Octokit} octokit
+   * @param {Object} repo
+   * @param {string} repo.repo
+   * @param {string} repo.owner
+   * @param {*} pkgValue
+   * @return {Pkg}
+   */
+  async applyGithubUpdate(octokit, repo, pkgValue) {
+    const result = await octokit.repos.update({
+      ...repo,
+      [this.getRepositoryKey()]: pkgValue,
+    })
+    info(`${result.headers.status} ${result.headers.link}`)
   }
 
 }
