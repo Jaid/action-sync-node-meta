@@ -21,9 +21,9 @@ const octokit = new GitHub(getInput("githubToken", {required: true}), {
 })
 
 async function main() {
-  const syncingDirection = getInput("direction", {required: true}).toLowerCase()
-  // const overwriteFile = syncingDirection === "overwrite-file"
-  const overwriteFile = false
+  // const syncingDirection = getInput("direction", {required: true}).toLowerCase()
+  const syncingDirection = "overwrite-github"
+  const overwriteFile = syncingDirection === "overwrite-file"
   info(`Syncing direction: ${syncingDirection}`)
   const pkgFile = path.resolve("package.json")
   const [repositoryResponse, pkgString] = await Promise.all([
