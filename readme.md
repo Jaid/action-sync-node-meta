@@ -24,7 +24,7 @@ This will overwrite the `package.json` file if it differs from the GitHub reposi
 
 `.github/workflows/example.yml`
 ```yaml
-name: Sync package.json with repository data
+name: Sync package.json with repository info
 on:
   push:
     branches: [master]
@@ -52,7 +52,7 @@ The secret `customGithubToken` is forwarded to the input `token`. It has to be a
 
 `.github/workflows/example2.yml`
 ```yaml
-name: Sync package.json with repository data
+name: Sync repository info with package.json
 on:
   push:
     branches: [master]
