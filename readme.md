@@ -58,10 +58,16 @@ jobs:
 <th>Info</th>
 </tr>
 <tr>
+<td>direction</td>
+<td>*</td>
+<td>overwrite-file</td>
+<td>The syncing direction, can be "overwrite-file" or "overwrite-github". If "overwrite-file", the file package.json will be edited in a pull request according to the GitHub repository info. If "overwrite-github", the GitHub repository info will be changed according to the content of the package.json file.</td>
+</tr>
+<tr>
 <td>githubToken</td>
 <td>*</td>
 <td></td>
-<td>Repository token for allowing the action to make commits.</td>
+<td>Repository token for allowing the action to make commits or change the repository info. If direction is "overwrite-file", this input be set from forwarding secrets.GITHUB_TOKEN in the workflow file. If direction is "overwrite-github", a custom personal access token with "repo" scope has to be created.</td>
 </tr>
 <tr>
 <td>approve</td>
