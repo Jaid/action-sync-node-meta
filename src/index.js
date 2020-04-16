@@ -132,6 +132,6 @@ async function main() {
 }
 
 main().catch(error => {
-  logError(error)
   setFailed("jaid/action-sync-node-meta threw an Error")
+  logError(error)
 })
