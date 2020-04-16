@@ -1,6 +1,7 @@
 import fsp from "@absolunet/fsp"
 import {debug, endGroup, error as logError, getInput, info, setFailed, startGroup} from "@actions/core"
 import {context, GitHub} from "@actions/github"
+import chalk from "chalk"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
 import getBooleanActionInput from "get-boolean-action-input"
@@ -62,44 +63,45 @@ async function main() {
   if (properties.length === 0) {
     throw new Error("None of the sync properties is enabled!")
   }
-  const changes = []
+  const results = []
   for (const property of properties) {
     const title = property.getTitle()
-    const pkgKey = property.getPkgKey()
-    const pkgValue = property.getPkgValue()
-    const repositoryKey = property.getRepositoryKey()
-    const repositoryValue = property.getRepositoryValue()
-    const isEqual = property.compare(pkgValue, repositoryValue)
-    if (!isEqual) {
-      changes.push({
+    const result = {
+      title,
+    }
+    results.push(result)
+    try {
+      const pkgKey = property.getPkgKey()
+      const pkgValue = property.getPkgValue()
+      const repositoryKey = property.getRepositoryKey()
+      const repositoryValue = property.getRepositoryValue()
+      const isEqual = property.compare(pkgValue, repositoryValue)
+      Object.assign(result, {
         pkgKey,
+        pkgValue,
         repositoryKey,
+        repositoryValue,
+        isEqual,
       })
-      if (overwriteFile) {
-        pkg = property.applyPkgUpdate(pkg, repositoryValue)
-      } else {
-        try {
+      if (!isEqual) {
+        if (overwriteFile) {
+          pkg = property.applyPkgUpdate(pkg, repositoryValue)
+        } else {
           await property.applyGithubUpdate(octokit, context.repo, pkgValue)
-        } catch (error) {
-          logError(error)
-          syncFailed = true
         }
       }
+    } catch (error) {
+      result.error = error
+      syncFailed = true
     }
-    startGroup(title)
-    info(`pkg.${pkgKey}: ${purdy.stringify(pkgValue)}`)
-    info(`repository.${repositoryKey}: ${purdy.stringify(repositoryValue)}`)
-    if (!isEqual) {
-      info(`They are not equal! Updating pkg.${property.getPkgKey()} value.`)
-    }
-    endGroup()
   }
-  if (overwriteFile && hasContent(changes)) {
+  const changedResults = results.filter(result => !result.isEqual)
+  if (overwriteFile && hasContent(changedResults)) {
     const indent = detectIndent(pkgString).indent || "    "
     const outputJson = JSON.stringify(pkg, null, indent)
     await fsp.outputFile(pkgFile, outputJson)
     const prefix = getInput("commitMessagePrefix") || ""
-    const changesString = changes.map(change => change.pkgKey).join(", ")
+    const changesString = changedResults.map(result => result.pkgKey).join(", ")
     let commitManager
     try {
       commitManager = new CommitManager({
@@ -125,6 +127,33 @@ async function main() {
     } finally {
       await commitManager.finalize()
     }
+  }
+  for (const result of results) {
+    let color
+    let suffix
+    if (result.error) {
+      color = chalk.red
+      suffix = "(failed)"
+    } else if (result.isEqual) {
+      color = chalk.yellow
+      suffix = "(equal)"
+    } else {
+      color = chalk.green
+      suffix = "(changed)"
+    }
+    startGroup(color(`${result.title} ${suffix}`.padEnd(40)))
+    info(`${chalk.yellow(`pkg.${result.pkgKey}:`)} ${purdy.stringify(result.pkgValue)}`)
+    info(`${chalk.yellow(`repository.${result.repositoryKey}:`)} ${purdy.stringify(result.repositoryValue)}`)
+    if (result.error) {
+      logError(result.error)
+    } else if (result.isEqual) {
+      info("These values seem to be the same")
+    } else if (overwriteFile) {
+      info(`They are not equal! Updated pkg.${result.pkgKey} value.`)
+    } else {
+      info(`They are not equal! Updating pkg.${result.repositoryKey} value.`)
+    }
+    endGroup()
   }
   if (syncFailed) {
     throw new Error("Syncing failed")
