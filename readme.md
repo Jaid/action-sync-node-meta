@@ -94,12 +94,6 @@ jobs:
 <th>Info</th>
 </tr>
 <tr>
-<td>direction</td>
-<td>*</td>
-<td>overwrite-file</td>
-<td>The syncing direction, can be "overwrite-file" or "overwrite-github". If "overwrite-file", the file package.json will be edited in a pull request according to the GitHub repository info. If "overwrite-github", the GitHub repository info will be changed according to the content of the package.json file.</td>
-</tr>
-<tr>
 <td>githubToken</td>
 <td>*</td>
 <td></td>
@@ -116,6 +110,12 @@ jobs:
 <td></td>
 <td>autofix: </td>
 <td>Prefix string used in messages for automatically generated commits</td>
+</tr>
+<tr>
+<td>direction</td>
+<td></td>
+<td>overwrite-file</td>
+<td>The syncing direction, can be "overwrite-file" or "overwrite-github". If "overwrite-file", the file package.json will be edited in a pull request according to the GitHub repository info. If "overwrite-github", the GitHub repository info will be changed according to the content of the package.json file.</td>
 </tr>
 <tr>
 <td>removeBranch</td>
