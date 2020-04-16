@@ -136,15 +136,15 @@ async function main() {
     let suffix
     if (result.error) {
       color = chalk.bgRed
-      suffix = "(failed)"
+      suffix = "failed"
     } else if (result.isEqual) {
       color = chalk.bgYellow
-      suffix = "(equal)"
+      suffix = "equal"
     } else {
       color = chalk.bgGreen
-      suffix = "(changed)"
+      suffix = "changed"
     }
-    startGroup(color(`${result.title} ${suffix}`.padEnd(40)))
+    startGroup(color(` ${result.title.padEnd(30 - suffix.length)}${suffix} `))
     info(`${chalk.cyan(`pkg.${result.pkgKey}:`)} ${purdy.stringify(result.pkgValue)}`)
     info(`${chalk.cyan(`repository.${result.repositoryKey}:`)} ${purdy.stringify(result.repositoryValue)}`)
     if (result.error) {
