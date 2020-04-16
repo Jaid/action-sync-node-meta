@@ -26,6 +26,9 @@ async function main() {
   let syncFailed = false
   const syncingDirection = getInput("direction", {required: true}).toLowerCase()
   const overwriteFile = syncingDirection === "overwrite-file"
+  if (!overwriteFile && syncingDirection !== "overwrite-github") {
+    throw new Error("Invalid direction input. Must be either \"overwrite-file\" or \"overwrite-github\".")
+  }
   if (overwriteFile) {
     info("Syncing direction: GitHub repository info → package.json")
   } else {
