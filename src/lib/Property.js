@@ -126,7 +126,7 @@ export default class Property {
    */
   async requestGithubApi(octokit, endpoint, options) {
     this.log(`API endpoint: ${endpoint}`)
-    this.log(`API options:${Object.keys(options).join(", ")}`)
+    this.log(`API options: ${Object.keys(options).join(", ")}`)
     const startTime = Date.now()
     const result = await octokit.request(endpoint, options)
     const ms = Date.now() - startTime
