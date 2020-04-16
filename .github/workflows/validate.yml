@@ -7,15 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: actions/checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.1.0
       - name: actions/setup-node
         uses: actions/setup-node@v1.4.1
         with:
-          node-version: "13.9.0"
+          node-version: "13.13.0"
       - name: npm install
         uses: jaid/action-npm-install@master
       - name: Jest
         uses: jaid/action-jest@master
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sync Node Meta
+        uses: jaid/action-sync-node-meta@master
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Uptodater
