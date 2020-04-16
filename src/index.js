@@ -62,10 +62,9 @@ async function main() {
     syncKeywords: KeywordsProperty,
   }
   for (const [inputKey, PropertyClass] of Object.entries(inputKeysForProperties)) {
-    const isIncluded = getBooleanActionInput(inputKey)
-    if (isIncluded) {
-      properties.push(new PropertyClass(constructorContext))
-    }
+    const property = new PropertyClass(constructorContext)
+    property.enabled = getBooleanActionInput(inputKey)
+    properties.push(property)
   }
   if (properties.length === 0) {
     throw new Error("None of the sync properties is enabled!")
@@ -83,15 +82,19 @@ async function main() {
       const pkgValue = property.getPkgValue()
       const repositoryKey = property.getRepositoryKey()
       const repositoryValue = property.getRepositoryValue()
-      const isEqual = property.compare(pkgValue, repositoryValue)
       Object.assign(result, {
         property,
         pkgKey,
         pkgValue,
         repositoryKey,
         repositoryValue,
-        isEqual,
+        enabled: property.enabled,
       })
+      if (!property.enabled) {
+        continue
+      }
+      const isEqual = property.compare(pkgValue, repositoryValue)
+      result.isEqual = isEqual
       if (!isEqual) {
         if (overwriteFile) {
           pkg = property.applyPkgUpdate(pkg, repositoryValue)
@@ -104,7 +107,15 @@ async function main() {
       syncFailed = true
     }
   }
-  const changedResults = results.filter(result => !result.isEqual)
+  const changedResults = results.filter(result => {
+    if (!result.enabled) {
+      return false
+    }
+    if (result.isEqual) {
+      return false
+    }
+    return true
+  })
   if (overwriteFile && hasContent(changedResults)) {
     const indent = detectIndent(pkgString).indent || "    "
     const outputJson = JSON.stringify(pkg, null, indent)
@@ -140,7 +151,10 @@ async function main() {
   for (const result of results) {
     let color
     let suffix
-    if (result.error) {
+    if (!result.enabled) {
+      color = chalk.bgGray
+      suffix = "disabled"
+    } else if (result.error) {
       color = chalk.bgRed
       suffix = "failed"
     } else if (result.isEqual) {
@@ -155,6 +169,8 @@ async function main() {
     info(`${chalk.cyan(`repository.${result.repositoryKey}:`)} ${purdy.stringify(result.repositoryValue)}`)
     if (result.error) {
       logError(result.error)
+    } else if (!result.enabled) {
+      info("This sync has been disabled in workflow.")
     } else if (result.isEqual) {
       info("These values seem to be the same")
     } else if (overwriteFile) {

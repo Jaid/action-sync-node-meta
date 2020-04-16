@@ -44,6 +44,11 @@ export default class Property {
   logMessages = []
 
   /**
+   * @type {boolean}
+   */
+  enabled = false
+
+  /**
    * @param {ConstructorContext} context
    */
   constructor({repository, pkg}) {
