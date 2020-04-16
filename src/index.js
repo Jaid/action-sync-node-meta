@@ -172,7 +172,7 @@ async function main() {
     } else if (!result.enabled) {
       info("This sync has been disabled in workflow.")
     } else if (result.isEqual) {
-      info("These values seem to be the same")
+      info("These values seem to be the same.")
     } else if (overwriteFile) {
       info(`They are not equal! Updated pkg.${result.pkgKey} value.`)
     } else {
