@@ -1,7 +1,6 @@
 import fsp from "@absolunet/fsp"
-import {debug, endGroup, error as logError, getInput, info, setFailed, startGroup} from "@actions/core"
+import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/core"
 import {context, GitHub} from "@actions/github"
-import chalk from "chalk"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
 import getBooleanActionInput from "get-boolean-action-input"
@@ -11,9 +10,11 @@ import purdy from "purdy"
 import readFileString from "read-file-string"
 import zahl from "zahl"
 
+import chalk from "lib/chalk"
 import DescriptionProperty from "lib/DescriptionProperty"
 import HomepageProperty from "lib/HomepageProperty"
 import KeywordsProperty from "lib/KeywordsProperty"
+import logError from "lib/logError"
 
 import pullBody from "./pullBody.hbs"
 
