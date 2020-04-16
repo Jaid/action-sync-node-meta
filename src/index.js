@@ -21,6 +21,7 @@ const octokit = new GitHub(getInput("githubToken", {required: true}), {
 })
 
 async function main() {
+  let syncFailed = false
   // const syncingDirection = getInput("direction", {required: true}).toLowerCase()
   const syncingDirection = "overwrite-github"
   const overwriteFile = syncingDirection === "overwrite-file"
@@ -77,7 +78,12 @@ async function main() {
       if (overwriteFile) {
         pkg = property.applyPkgUpdate(pkg, repositoryValue)
       } else {
-        await property.applyGithubUpdate(octokit, context.repo, pkgValue)
+        try {
+          await property.applyGithubUpdate(octokit, context.repo, pkgValue)
+        } catch (error) {
+          console.warn(error)
+          syncFailed = true
+        }
       }
     }
     startGroup(title)
@@ -94,23 +100,34 @@ async function main() {
     await fsp.outputFile(pkgFile, outputJson)
     const prefix = getInput("commitMessagePrefix") || ""
     const changesString = changes.map(change => change.pkgKey).join(", ")
-    const commitManager = new CommitManager({
-      autoApprove: "approve",
-      autoRemoveBranch: "removeBranch",
-      branchPrefix: "fix-",
-      pullRequestTitle: "Applied a fix from action-sync-node-meta",
-      pullRequestBody: manager => pullBody({
-        ...context.repo,
-        sha7: context.sha?.slice(0, 8),
-        autoApprove: manager.autoApprove,
-        sha: context.sha,
-        actionRepo: "Jaid/action-sync-node-meta",
-        actionPage: "https://github.com/marketplace/actions/sync-node-meta",
-        branch: manager.branch,
-      }),
-      mergeMessage: manager => `Automatically merged Node metadata update from #${manager.pullNumber}`,
-    })
-    await commitManager.push(`${prefix}Updated package.json[${changesString}]`)
+    let commitManager
+    try {
+      commitManager = new CommitManager({
+        autoApprove: "approve",
+        autoRemoveBranch: "removeBranch",
+        branchPrefix: "fix-",
+        pullRequestTitle: "Applied a fix from action-sync-node-meta",
+        pullRequestBody: manager => pullBody({
+          ...context.repo,
+          sha7: context.sha?.slice(0, 8),
+          autoApprove: manager.autoApprove,
+          sha: context.sha,
+          actionRepo: "Jaid/action-sync-node-meta",
+          actionPage: "https://github.com/marketplace/actions/sync-node-meta",
+          branch: manager.branch,
+        }),
+        mergeMessage: manager => `Automatically merged Node metadata update from #${manager.pullNumber}`,
+      })
+      await commitManager.push(`${prefix}Updated package.json[${changesString}]`)
+    } catch (error) {
+      console.error(error)
+      syncFailed = true
+    } finally {
+      await commitManager.finalize()
+    }
+  }
+  if (syncFailed) {
+    throw new Error("Syncing failed")
   }
 }
 
