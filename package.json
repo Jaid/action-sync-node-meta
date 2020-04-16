@@ -36,11 +36,13 @@
     "prepareRelease": "npm run buildPush",
     "prepareActionJest": "npm run build:prod"
   },
-  "description": "GitHub Action that syncs package.json with the repository metadata (description, homepage, topics/keywords).",
+  "description": "GitHub Action that syncs package.json with the repository metadata.",
   "funding": "https://github.com/sponsors/jaid",
   "repository": {
     "type": "git",
     "url": "https://github.com/jaid/action-sync-node-meta"
   },
-  "name": "action-sync-node-meta"
+  "name": "action-sync-node-meta",
+  "homepage": "https://github.com/Jaid/action-sync-node-meta",
+  "keywords": []
 }
