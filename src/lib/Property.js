@@ -1,4 +1,3 @@
-import {info} from "@actions/core"
 import immer from "immer"
 import {isEqual} from "lodash"
 import {upperCaseFirst} from "upper-case-first"
@@ -125,9 +124,9 @@ export default class Property {
    * @return {Pkg}
    */
   async applyGithubUpdate(octokit, repo, pkgValue) {
-    this.log(typeof pkgValue)
-    this.log(pkgValue)
-    const result = await octokit.request("PATCH /repos/:owner/:repo", {
+    const endpoint = "PATCH /repos/:owner/:repo"
+    this.log(`API endpoint: ${endpoint}`)
+    const result = await octokit.request(endpoint, {
       ...repo,
       [this.getRepositoryKey()]: pkgValue,
     })

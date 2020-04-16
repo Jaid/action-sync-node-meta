@@ -33,7 +33,9 @@ export default class KeywordsProperty extends Property {
    * @return {Pkg}
    */
   async applyGithubUpdate(octokit, repo, pkgValue) {
-    const result = await octokit.request("PUT /repos/:owner/:repo/topics", {
+    const endpoint = "PUT /repos/:owner/:repo/topics"
+    this.log(`API endpoint: ${endpoint}`)
+    const result = await octokit.request(endpoint, {
       ...repo,
       names: normalizeArray(pkgValue),
     })
