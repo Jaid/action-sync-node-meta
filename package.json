@@ -17,6 +17,7 @@
     "lodash": "^4.17.15",
     "purdy": "^3.5.1",
     "read-file-string": "^1.0.4",
+    "readable-ms": "^2.0.3",
     "upper-case-first": "^2.0.1",
     "zahl": "^2.0.6"
   },

@@ -1,5 +1,6 @@
 import immer from "immer"
 import {isEqual} from "lodash"
+import readableMs from "readable-ms"
 import {upperCaseFirst} from "upper-case-first"
 
 /**
@@ -121,16 +122,33 @@ export default class Property {
    * @param {string} repo.repo
    * @param {string} repo.owner
    * @param {*} pkgValue
-   * @return {Pkg}
+   * @return {Promise<number>}
+   */
+  async requestGithubApi(octokit, endpoint, options) {
+    this.log(`API endpoint: ${endpoint}`)
+    this.log(`API options:${Object.keys(options).join(", ")}`)
+    const startTime = Date.now()
+    const result = await octokit.request(endpoint, options)
+    const ms = Date.now() - startTime
+    this.log(`${result.headers.status} ${result.headers.link} in ${readableMs(ms)}`)
+    return result.headers.status
+  }
+
+  /**
+   * @param {import("@octokit/rest").Octokit} octokit
+   * @param {Object} repo
+   * @param {string} repo.repo
+   * @param {string} repo.owner
+   * @param {*} pkgValue
+   * @return {Promise<void>}
    */
   async applyGithubUpdate(octokit, repo, pkgValue) {
     const endpoint = "PATCH /repos/:owner/:repo"
-    this.log(`API endpoint: ${endpoint}`)
-    const result = await octokit.request(endpoint, {
+    const options = {
       ...repo,
       [this.getRepositoryKey()]: pkgValue,
-    })
-    this.log(`${result.headers.status} ${result.headers.link}`)
+    }
+    await this.requestGithubApi(endpoint, options)
   }
 
 }

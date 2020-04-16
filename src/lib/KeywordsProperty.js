@@ -30,16 +30,15 @@ export default class KeywordsProperty extends Property {
    * @param {string} repo.repo
    * @param {string} repo.owner
    * @param {*} pkgValue
-   * @return {Pkg}
+   * @return {Promise<void>}
    */
   async applyGithubUpdate(octokit, repo, pkgValue) {
     const endpoint = "PUT /repos/:owner/:repo/topics"
-    this.log(`API endpoint: ${endpoint}`)
-    const result = await octokit.request(endpoint, {
+    const options = {
       ...repo,
       names: normalizeArray(pkgValue),
-    })
-    this.log(`${result.headers.status} ${result.headers.link}`)
+    }
+    await this.requestGithubApi(endpoint, options)
   }
 
 }
