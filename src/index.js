@@ -154,7 +154,7 @@ async function main() {
     } else if (overwriteFile) {
       info(`They are not equal! Updated pkg.${result.pkgKey} value.`)
     } else {
-      info(`They are not equal! Updating pkg.${result.repositoryKey} value.`)
+      info(`They are not equal! Updating repository.${result.repositoryKey} value.`)
     }
     for (const logMessage of result.property.logMessages) {
       info(logMessage)

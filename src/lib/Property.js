@@ -130,7 +130,7 @@ export default class Property {
     const startTime = Date.now()
     const result = await octokit.request(endpoint, options)
     const ms = Date.now() - startTime
-    this.log(`${result.headers.status} ${result.headers.link} in ${readableMs(ms)}`)
+    this.log(`${result.headers.status} in ${readableMs(ms)}`)
     return result.headers.status
   }
 
