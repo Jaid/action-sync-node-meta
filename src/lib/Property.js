@@ -39,6 +39,11 @@ import {upperCaseFirst} from "upper-case-first"
 export default class Property {
 
   /**
+   * @type {string[]}
+   */
+  logMessages = []
+
+  /**
    * @param {ConstructorContext} context
    */
   constructor({repository, pkg}) {
@@ -105,6 +110,13 @@ export default class Property {
   }
 
   /**
+   * @param {string} message
+   */
+  log(message) {
+    this.logMessages.push(message)
+  }
+
+  /**
    * @param {import("@octokit/rest").Octokit} octokit
    * @param {Object} repo
    * @param {string} repo.repo
@@ -113,11 +125,13 @@ export default class Property {
    * @return {Pkg}
    */
   async applyGithubUpdate(octokit, repo, pkgValue) {
-    const result = await octokit.repos.update({
+    this.log(typeof pkgValue)
+    this.log(pkgValue)
+    const result = await octokit.request("PATCH /repos/:owner/:repo", {
       ...repo,
       [this.getRepositoryKey()]: pkgValue,
     })
-    info(`${result.headers.status} ${result.headers.link}`)
+    this.log(`${result.headers.status} ${result.headers.link}`)
   }
 
 }

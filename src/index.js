@@ -68,6 +68,7 @@ async function main() {
   for (const property of properties) {
     const title = property.getTitle()
     const result = {
+      property,
       title,
     }
     results.push(result)
@@ -78,6 +79,7 @@ async function main() {
       const repositoryValue = property.getRepositoryValue()
       const isEqual = property.compare(pkgValue, repositoryValue)
       Object.assign(result, {
+        property,
         pkgKey,
         pkgValue,
         repositoryKey,
@@ -153,6 +155,9 @@ async function main() {
       info(`They are not equal! Updated pkg.${result.pkgKey} value.`)
     } else {
       info(`They are not equal! Updating pkg.${result.repositoryKey} value.`)
+    }
+    for (const logMessage of result.property.logMessages) {
+      info(logMessage)
     }
     endGroup()
   }

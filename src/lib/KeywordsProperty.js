@@ -37,7 +37,7 @@ export default class KeywordsProperty extends Property {
       ...repo,
       names: normalizeArray(pkgValue),
     })
-    info(`${result.headers.status} ${result.headers.link}`)
+    this.log(`${result.headers.status} ${result.headers.link}`)
   }
 
 }
