@@ -11,6 +11,10 @@ There are values that are meant to be the same. Why not automatically keep them 
 
 ![Banner](readme/banner.jpg)
 
+### Example output
+
+![Example output](readme/output.png)
+
 
 
 
@@ -105,7 +109,7 @@ jobs:
 <td>approve</td>
 <td></td>
 <td>true</td>
-<td>If true, pull requests created by this action are automatically approved and merged.</td>
+<td>If true and direction is "overwrite-file", pull requests created by this action are automatically approved and merged.</td>
 </tr>
 <tr>
 <td>commitMessagePrefix</td>
@@ -117,7 +121,7 @@ jobs:
 <td>removeBranch</td>
 <td></td>
 <td>true</td>
-<td>If true and approve is also true, automatically merged pull requests will delete their branch afterwards.</td>
+<td>If true and direction is "overwrite-file" and approve is also true, automatically merged pull requests will delete their branch afterwards.</td>
 </tr>
 <tr>
 <td>syncDescription</td>
