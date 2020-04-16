@@ -1,5 +1,5 @@
 import fsp from "@absolunet/fsp"
-import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/core"
+import {debug, endGroup, error as logError, getInput, info, setFailed, startGroup} from "@actions/core"
 import {context, GitHub} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
@@ -81,7 +81,7 @@ async function main() {
         try {
           await property.applyGithubUpdate(octokit, context.repo, pkgValue)
         } catch (error) {
-          console.warn(error)
+          logError(error)
           syncFailed = true
         }
       }
@@ -120,7 +120,7 @@ async function main() {
       })
       await commitManager.push(`${prefix}Updated package.json[${changesString}]`)
     } catch (error) {
-      console.error(error)
+      logError(error)
       syncFailed = true
     } finally {
       await commitManager.finalize()
@@ -132,6 +132,6 @@ async function main() {
 }
 
 main().catch(error => {
-  console.error(error)
+  logError(error)
   setFailed("jaid/action-sync-node-meta threw an Error")
 })
