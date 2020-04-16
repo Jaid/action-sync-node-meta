@@ -148,7 +148,7 @@ export default class Property {
       ...repo,
       [this.getRepositoryKey()]: pkgValue,
     }
-    await this.requestGithubApi(endpoint, options)
+    await this.requestGithubApi(octokit, endpoint, options)
   }
 
 }

@@ -38,7 +38,7 @@ export default class KeywordsProperty extends Property {
       ...repo,
       names: normalizeArray(pkgValue),
     }
-    await this.requestGithubApi(endpoint, options)
+    await this.requestGithubApi(octokit, endpoint, options)
   }
 
 }
