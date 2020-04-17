@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "outDir": "dist/typescript",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "paths": {
+      "lib/*": [
+        "src/lib/*"
+      ],
+      "src/*": [
+        "src/*"
+      ],
+      "root/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "typeAcquisition": {
+    "enable": true
+  }
+}
