@@ -193,6 +193,8 @@ async function main() {
   }
 }
 
+info(`${_PKG_NAME} v${_PKG_VERSION}`)
+
 main().catch(error => {
   setFailed("jaid/action-sync-node-meta threw an Error")
   logError(error)
