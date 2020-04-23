@@ -17,7 +17,6 @@ import {upperCaseFirst} from "upper-case-first"
  * @prop {string} homepage
  * @prop {string} html_url
  * @prop {License} license
- * @prop {string} master_branch
  */
 
 /**

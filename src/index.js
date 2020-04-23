@@ -48,8 +48,12 @@ async function main() {
   if (!context?.payload?.repository) {
     throw new Error("Could not fetch repository info from context.payload.repository")
   }
+  /**
+   * @type {import("lib/Property").Repository}
+   */
+  const repository = repositoryResponse.data
   const constructorContext = {
-    repository: repositoryResponse.data,
+    repository,
     pkg,
   }
   /**
