@@ -1,7 +1,9 @@
 import chalk from "chalk"
 
 // GitHub Actions CI supports color, chalk just does not know that
-chalk.enabled = true
-chalk.level = 2 // 256 colors
+// So we force a certain chalk level
+const customChalk = new chalk.Instance({
+  level: 2,
+})
 
-export default chalk
+export default customChalk
