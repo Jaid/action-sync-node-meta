@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
-        uses: jaid/action-sync-node-meta@v1.0.0
+        uses: jaid/action-sync-node-meta@v1.3.0
         githubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
 
