@@ -4,7 +4,7 @@
 <a href="https://raw.githubusercontent.com/jaid/action-sync-node-meta/master/license.txt"><img src="https://img.shields.io/github/license/jaid/action-sync-node-meta?style=flat-square" alt="License"/></a> <a href="https://github.com/sponsors/jaid"><img src="https://img.shields.io/badge/<3-Sponsor-FF45F1?style=flat-square" alt="Sponsor action-sync-node-meta"/></a>  
 <a href="https://actions-badge.atrox.dev/jaid/action-sync-node-meta/goto"><img src="https://img.shields.io/endpoint.svg?style=flat-square&url=https%3A%2F%2Factions-badge.atrox.dev%2Fjaid%2Faction-sync-node-meta%2Fbadge" alt="Build status"/></a> <a href="https://github.com/jaid/action-sync-node-meta/commits"><img src="https://img.shields.io/github/commits-since/jaid/action-sync-node-meta/v1.2.0?style=flat-square&logo=github" alt="Commits since v1.2.0"/></a> <a href="https://github.com/jaid/action-sync-node-meta/commits"><img src="https://img.shields.io/github/last-commit/jaid/action-sync-node-meta?style=flat-square&logo=github" alt="Last commit"/></a> <a href="https://github.com/jaid/action-sync-node-meta/issues"><img src="https://img.shields.io/github/issues/jaid/action-sync-node-meta?style=flat-square&logo=github" alt="Issues"/></a>  
 
-**GitHub Action that syncs package.json with the repository metadata (description, homepage, topics/keywords).**
+**GitHub Action that syncs package.json with the repository metadata.**
 
 
 There are values that are meant to be the same. Why not automatically keep them synchronized?
@@ -43,7 +43,7 @@ jobs:
         with:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
-        uses: jaid/action-sync-node-meta@v1.0.0
+        uses: jaid/action-sync-node-meta@v1.3.0
         githubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
 
