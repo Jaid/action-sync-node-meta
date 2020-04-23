@@ -43,5 +43,22 @@
   },
   "name": "action-sync-node-meta",
   "homepage": "https://github.com/Jaid/action-sync-node-meta",
-  "keywords": []
+  "keywords": [
+    "action",
+    "action-sync-node-meta",
+    "actions",
+    "bot",
+    "github-action",
+    "github-actions",
+    "github-api",
+    "metadata",
+    "node",
+    "node-js",
+    "nodejs",
+    "repository",
+    "sync-node-meta",
+    "util",
+    "utility",
+    "workflow"
+  ]
 }
