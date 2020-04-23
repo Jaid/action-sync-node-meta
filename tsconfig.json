@@ -2,11 +2,13 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "esModuleInterop": true,
     "baseUrl": ".",
     "outDir": "dist/typescript",
+    "newLine": "lf",
     "declaration": true,
     "emitDeclarationOnly": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "paths": {
       "lib/*": [
         "src/lib/*"
@@ -20,7 +22,8 @@
     }
   },
   "include": [
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
