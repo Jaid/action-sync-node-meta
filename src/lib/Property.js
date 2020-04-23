@@ -123,10 +123,8 @@ export default class Property {
 
   /**
    * @param {import("@octokit/rest").Octokit} octokit
-   * @param {Object} repo
-   * @param {string} repo.repo
-   * @param {string} repo.owner
-   * @param {*} pkgValue
+   * @param {string} endpoint
+   * @param {Object} [options]
    * @return {Promise<void>}
    */
   async requestGithubApi(octokit, endpoint, options) {
