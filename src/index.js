@@ -131,7 +131,7 @@ async function main() {
       commitManager = new CommitManager({
         autoApprove: "approve",
         autoRemoveBranch: "removeBranch",
-        branchPrefix: "fix-",
+        branchPrefix: "action-sync-node-meta-",
         pullRequestTitle: "Applied a fix from action-sync-node-meta",
         pullRequestBody: manager => pullBody({
           ...context.repo,
