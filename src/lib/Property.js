@@ -36,6 +36,9 @@ import {upperCaseFirst} from "upper-case-first"
  * @prop {string[]} keywords
  */
 
+/**
+ * @class Property
+ */
 export default class Property {
 
   /**

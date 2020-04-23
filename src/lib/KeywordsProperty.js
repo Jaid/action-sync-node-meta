@@ -1,4 +1,3 @@
-import {info} from "@actions/core"
 import {isEqual} from "lodash"
 
 import normalizeArray from "lib/normalizeArray"
