@@ -1,5 +1,5 @@
 /*!
-*** action-sync-node-meta 1.2.0
+*** action-sync-node-meta 1.3.0
 *** Copyright © 2020, Jaid <jaid.jsx@gmail.com> (https://github.com/Jaid)
 *** @license MIT
 *** See https://github.com/Jaid/action-sync-node-meta
