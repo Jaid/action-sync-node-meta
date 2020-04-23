@@ -127,7 +127,7 @@ export default class Property {
    * @param {string} repo.repo
    * @param {string} repo.owner
    * @param {*} pkgValue
-   * @return {Promise<number>}
+   * @return {Promise<void>}
    */
   async requestGithubApi(octokit, endpoint, options) {
     this.log(`API endpoint: ${endpoint}`)
@@ -136,7 +136,6 @@ export default class Property {
     const result = await octokit.request(endpoint, options)
     const ms = Date.now() - startTime
     this.log(`${result.headers.status} in ${readableMs(ms)}`)
-    return result.headers.status
   }
 
   /**
