@@ -169,8 +169,9 @@ async function main() {
       suffix = "changed"
     }
     startGroup(color(` ${result.title.padEnd(30 - suffix.length)}${suffix} `))
-    info(`${chalk.cyan(`pkg.${result.pkgKey}:`)} ${purdy.stringify(result.pkgValue)}`)
-    info(`${chalk.cyan(`repository.${result.repositoryKey}:`)} ${purdy.stringify(result.repositoryValue)}`)
+    const purdyOptions = {}
+    info(`${chalk.cyan(`pkg.${result.pkgKey}:`)} ${purdy.stringify(result.pkgValue, purdyOptions)}`)
+    info(`${chalk.cyan(`repository.${result.repositoryKey}:`)} ${purdy.stringify(result.repositoryValue, purdyOptions)}`)
     if (result.error) {
       logError(result.error)
     } else if (!result.enabled) {
