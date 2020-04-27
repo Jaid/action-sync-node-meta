@@ -30,7 +30,7 @@ jobs:
 Example workflow that runs whenever commits are pushed on branch `master`.  
 This will change the GitHub repository info whenever it differs from the content of `package.json`.
 
-The secret `customGithubToken` is forwarded to the input `token`. It has to be a [personal access token](https://github.com/settings/tokens) with scope "repo" added in [your repository's secrets settings](https://github.com/YOUR_NAME/YOUR_REPOSITORY/settings/secrets).
+The secret `customGithubToken` is forwarded to the input `githubToken`. It has to be a [personal access token](https://github.com/settings/tokens) with scope "repo" added in [your repository's secrets settings](https://github.com/YOUR_NAME/YOUR_REPOSITORY/settings/secrets).
 
 `.github/workflows/example2.yml`
 ```yaml
