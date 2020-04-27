@@ -21,7 +21,8 @@ jobs:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.3.0
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### overwrite-github
@@ -49,6 +50,7 @@ jobs:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.0.0
-        direction: overwrite-github
-        githubToken: ${{ secrets.customGithubToken }}
+        with:
+          direction: overwrite-github
+          githubToken: ${{ secrets.customGithubToken }}
 ```
