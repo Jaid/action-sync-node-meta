@@ -43,9 +43,9 @@ jobs:
         with:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
-        uses: jaid/action-sync-node-meta@v1.3.1
-          with:
-            githubToken: ${{ secrets.GITHUB_TOKEN }}
+        uses: jaid/action-sync-node-meta@v1.3.0
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### overwrite-github
@@ -53,7 +53,7 @@ jobs:
 Example workflow that runs whenever commits are pushed on branch `master`.  
 This will change the GitHub repository info whenever it differs from the content of `package.json`.
 
-The secret `customGithubToken` is forwarded to the input `token`. It has to be a [personal access token](https://github.com/settings/tokens) with scope "repo" added in [your repository's secrets settings](https://github.com/YOUR_NAME/YOUR_REPOSITORY/settings/secrets).
+The secret `customGithubToken` is forwarded to the input `githubToken`. It has to be a [personal access token](https://github.com/settings/tokens) with scope "repo" added in [your repository's secrets settings](https://github.com/YOUR_NAME/YOUR_REPOSITORY/settings/secrets).
 
 `.github/workflows/example2.yml`
 ```yaml
@@ -72,10 +72,10 @@ jobs:
         with:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
-        uses: jaid/action-sync-node-meta@v1.3.1
-          with:
-            direction: overwrite-github
-            githubToken: ${{ secrets.customGithubToken }}
+        uses: jaid/action-sync-node-meta@v1.0.0
+        with:
+          direction: overwrite-github
+          githubToken: ${{ secrets.customGithubToken }}
 ```
 
 
