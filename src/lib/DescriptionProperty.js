@@ -13,6 +13,9 @@ export default class DescriptionProperty extends Property {
     if (!syncDescription) {
       return "input.syncDescription is false"
     }
+    if (!this.overwriteFile && typeof this.pkg.description !== "string") {
+      return "package.json[description] is not a string"
+    }
     return false
   }
 

@@ -46,6 +46,9 @@ export default class KeywordsProperty extends Property {
     if (!syncKeywords) {
       return "input.syncKeywords is false"
     }
+    if (!this.overwriteFile && !Array.isArray(this.pkg.keywords)) {
+      return "package.json[keywords] is not an array"
+    }
     return false
   }
 

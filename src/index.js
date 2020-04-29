@@ -54,6 +54,7 @@ async function main() {
   const constructorContext = {
     repository,
     pkg,
+    overwriteFile,
   }
   const propertyClasses = [DescriptionProperty, HomepageProperty, KeywordsProperty]
   const properties = propertyClasses.map(PropertyClass => new PropertyClass(constructorContext))

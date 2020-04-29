@@ -7,6 +7,7 @@ import {upperCaseFirst} from "upper-case-first"
  * @typedef {Object} ConstructorContext
  * @prop {Repository} repository
  * @prop {Pkg} pkg
+ * @prop {boolean} overwriteFile
  */
 
 /**
@@ -51,11 +52,12 @@ export default class Property {
   enabled = true
 
   /**
-   * @param {ConstructorContext} context
+   * @param {ConstructorContext} defaultValues
    */
-  constructor({repository, pkg}) {
-    this.repository = repository
-    this.pkg = pkg
+  constructor(defaultValues) {
+    this.repository = defaultValues.repository
+    this.pkg = defaultValues.pkg
+    this.overwriteFile = defaultValues.overwriteFile
     const shouldSkip = this.shouldSkip()
     if (shouldSkip !== false) {
       this.log(`Syncing for this property is not enabled: ${shouldSkip}`)

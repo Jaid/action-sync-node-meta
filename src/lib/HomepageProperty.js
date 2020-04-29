@@ -13,6 +13,9 @@ export default class HomepageProperty extends Property {
     if (!syncHomepage) {
       return "input.syncHomepage is false"
     }
+    if (!this.overwriteFile && typeof this.pkg.homepage !== "string") {
+      return "package.json[homepage] is not a string"
+    }
     return false
   }
 
