@@ -3,7 +3,6 @@ import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/c
 import {context, GitHub} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
-import getBooleanActionInput from "get-boolean-action-input"
 import hasContent from "has-content"
 import path from "path"
 import purdy from "purdy"
@@ -56,21 +55,10 @@ async function main() {
     repository,
     pkg,
   }
-  /**
-   * @type {import("lib/Property").default[]}
-   */
-  const properties = []
-  const inputKeysForProperties = {
-    syncDescription: DescriptionProperty,
-    syncHomepage: HomepageProperty,
-    syncKeywords: KeywordsProperty,
-  }
-  for (const [inputKey, PropertyClass] of Object.entries(inputKeysForProperties)) {
-    const property = new PropertyClass(constructorContext)
-    property.enabled = getBooleanActionInput(inputKey)
-    properties.push(property)
-  }
-  if (properties.length === 0) {
+  const propertyClasses = [DescriptionProperty, HomepageProperty, KeywordsProperty]
+  const properties = propertyClasses.map(PropertyClass => new PropertyClass(constructorContext))
+  const enabledProperties = properties.filter(property => property.enabled)
+  if (enabledProperties.length === 0) {
     throw new Error("None of the sync properties is enabled!")
   }
   const results = []

@@ -48,7 +48,7 @@ export default class Property {
   /**
    * @type {boolean}
    */
-  enabled = false
+  enabled = true
 
   /**
    * @param {ConstructorContext} context
@@ -56,6 +56,11 @@ export default class Property {
   constructor({repository, pkg}) {
     this.repository = repository
     this.pkg = pkg
+    const shouldSkip = this.shouldSkip()
+    if (shouldSkip !== false) {
+      this.log(`Syncing for this property is not enabled: ${shouldSkip}`)
+      this.enabled = false
+    }
   }
 
   /**
@@ -86,6 +91,13 @@ export default class Property {
   getRepositoryValue() {
     const key = this.getRepositoryKey()
     return this.repository[key]
+  }
+
+  /**
+   * @return {false|string}
+   */
+  shouldSkip() {
+    return false
   }
 
   /**

@@ -1,3 +1,4 @@
+import getActionBooleanInput from "get-boolean-action-input"
 import {isEqual} from "lodash"
 
 import normalizeArray from "lib/normalizeArray"
@@ -38,6 +39,14 @@ export default class KeywordsProperty extends Property {
       names: normalizeArray(pkgValue),
     }
     await this.requestGithubApi(octokit, endpoint, options)
+  }
+
+  shouldSkip() {
+    const syncKeywords = getActionBooleanInput("syncKeywords")
+    if (!syncKeywords) {
+      return "inputs.syncKeywords is false"
+    }
+    return false
   }
 
 }
