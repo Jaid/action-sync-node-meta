@@ -11,7 +11,7 @@ export default class HomepageProperty extends Property {
   shouldSkip() {
     const syncHomepage = getActionBooleanInput("syncHomepage")
     if (!syncHomepage) {
-      return "inputs.syncHomepage is false"
+      return "input.syncHomepage is false"
     }
     return false
   }

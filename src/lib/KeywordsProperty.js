@@ -44,7 +44,7 @@ export default class KeywordsProperty extends Property {
   shouldSkip() {
     const syncKeywords = getActionBooleanInput("syncKeywords")
     if (!syncKeywords) {
-      return "inputs.syncKeywords is false"
+      return "input.syncKeywords is false"
     }
     return false
   }

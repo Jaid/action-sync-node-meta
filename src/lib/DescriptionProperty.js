@@ -11,7 +11,7 @@ export default class DescriptionProperty extends Property {
   shouldSkip() {
     const syncDescription = getActionBooleanInput("syncDescription")
     if (!syncDescription) {
-      return "inputs.syncDescription is false"
+      return "input.syncDescription is false"
     }
     return false
   }
