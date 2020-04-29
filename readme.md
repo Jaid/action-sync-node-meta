@@ -26,6 +26,8 @@ There are values that are meant to be the same. Why not automatically keep them 
 Example workflow that runs whenever commits are pushed on branch `master`.  
 This will overwrite the `package.json` file if it differs from the GitHub repository info.
 
+This is the recommended syncing direction, because of the more simple setup (no need to manually add a secret to the repository settings) and the adventages of git commits (better monitoring, revertability).
+
 `.github/workflows/example.yml`
 ```yaml
 name: Sync package.json with repository info
@@ -43,7 +45,7 @@ jobs:
         with:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
-        uses: jaid/action-sync-node-meta@v1.3.0
+        uses: jaid/action-sync-node-meta@v1.4.0
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -72,7 +74,7 @@ jobs:
         with:
           node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
-        uses: jaid/action-sync-node-meta@v1.0.0
+        uses: jaid/action-sync-node-meta@v1.4.0
         with:
           direction: overwrite-github
           githubToken: ${{ secrets.customGithubToken }}
