@@ -1,35 +1,8 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "baseUrl": ".",
-    "outDir": "dist/typescript",
-    "newLine": "lf",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "paths": {
-      "lib/*": [
-        "src/lib/*"
-      ],
-      "src/*": [
-        "src/*"
-      ],
-      "root/*": [
-        "./*"
-      ]
-    }
-  },
+  "extends": "./tsconfig.base.json",
   "include": [
     "src/**/*.js",
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "node_modules/webpack-config-jaid/assets.d.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
-  "typeAcquisition": {
-    "enable": true
-  }
 }
