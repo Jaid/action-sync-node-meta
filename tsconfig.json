@@ -5,4 +5,7 @@
     "src/**/*.ts",
     "node_modules/webpack-config-jaid/assets.d.ts"
   ],
+  "typeAcquisition": {
+    "enable": true
+  }
 }
