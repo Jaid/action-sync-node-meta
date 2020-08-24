@@ -1,3 +1,3 @@
 module.exports = {
-  extends: "jaid"
+  extends: "jaid",
 }
