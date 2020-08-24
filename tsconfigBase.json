@@ -20,8 +20,5 @@
         "./*"
       ]
     }
-  },
-  "typeAcquisition": {
-    "enable": true
   }
 }
