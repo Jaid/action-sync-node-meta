@@ -121,7 +121,7 @@ async function main() {
         autoApprove: "approve",
         autoRemoveBranch: "removeBranch",
         branchPrefix: "action-sync-node-meta-",
-        commitMessage: `${prefix}updated package.json[${changesString}]`,
+        commitMessage: `${prefix ? `${prefix} ` : ''}updated package.json[${changesString}]`,
         pullRequestTitle: "Applied a fix from action-sync-node-meta",
         pullRequestBody: manager => pullBody({
           ...context.repo,
