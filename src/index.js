@@ -116,13 +116,12 @@ async function main() {
     const prefix = getInput("commitMessagePrefix") || ""
     const changesString = changedResults.map(result => result.pkgKey).join(", ")
     let commitManager
-    info('foo bar baz')
     try {
       commitManager = new CommitManager({
         autoApprove: "approve",
         autoRemoveBranch: "removeBranch",
         branchPrefix: "action-sync-node-meta-",
-        commitMessage: `${prefix}Updated package.json[${changesString}]`,
+        commitMessage: `${prefix}updated package.json[${changesString}]`,
         pullRequestTitle: "Applied a fix from action-sync-node-meta",
         pullRequestBody: manager => pullBody({
           ...context.repo,
@@ -137,7 +136,6 @@ async function main() {
       })
       await commitManager.push()
     } catch (error) {
-      info(error)
       logError(error)
       syncFailed = true
     } finally {
