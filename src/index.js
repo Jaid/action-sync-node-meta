@@ -116,7 +116,7 @@ async function main() {
     const prefix = getInput("commitMessagePrefix") || ""
     const changesString = changedResults.map(result => result.pkgKey).join(", ")
     let commitManager
-    console.log('foo bar baz')
+    info('foo bar baz')
     try {
       commitManager = new CommitManager({
         autoApprove: "approve",
@@ -137,7 +137,7 @@ async function main() {
       })
       await commitManager.push()
     } catch (error) {
-      console.log(error)
+      info(error)
       logError(error)
       syncFailed = true
     } finally {
