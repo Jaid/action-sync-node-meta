@@ -111,7 +111,7 @@ async function main() {
   })
   if (overwriteFile && hasContent(changedResults)) {
     const indent = detectIndent(pkgString).indent || "    "
-    const outputJson = JSON.stringify(pkg, null, indent)
+    const outputJson = `${JSON.stringify(pkg, null, indent)}\n`
     await fsp.outputFile(pkgFile, outputJson)
     const prefix = getInput("commitMessagePrefix") || ""
     const changesString = changedResults.map(result => result.pkgKey).join(", ")
