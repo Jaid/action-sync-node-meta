@@ -40,10 +40,6 @@ jobs:
     steps:
       - name: actions/checkout
         uses: actions/checkout@v2.0.0
-      - name: actions/setup-node
-        uses: actions/setup-node@v1.4.1
-        with:
-          node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.4.0
         with:
@@ -69,10 +65,6 @@ jobs:
     steps:
       - name: actions/checkout
         uses: actions/checkout@v2.0.0
-      - name: actions/setup-node
-        uses: actions/setup-node@v1.4.1
-        with:
-          node-version: "13.9.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.4.0
         with:
