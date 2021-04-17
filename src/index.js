@@ -121,7 +121,6 @@ async function main() {
         autoApprove: "approve",
         autoRemoveBranch: "removeBranch",
         branch: "action-sync-node-meta",
-        forcePush: true,
         pullRequestTitle: "Applied a fix from action-sync-node-meta",
         pullRequestBody: manager => pullBody({
           ...context.repo,
