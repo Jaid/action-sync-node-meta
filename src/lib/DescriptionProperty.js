@@ -8,9 +8,9 @@ export default class DescriptionProperty extends Property {
     return "description"
   }
 
-  getPkgValue() {
-    const key = this.getPkgKey()
-    return this.pkg[key] || ''
+  getRepositoryValue() {
+    const key = this.getRepositoryKey()
+    return this.repository[key] || undefined
   }
 
   shouldSkip() {

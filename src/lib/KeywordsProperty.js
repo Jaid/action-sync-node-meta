@@ -10,13 +10,13 @@ export default class KeywordsProperty extends Property {
     return "keywords"
   }
 
-  getPkgValue() {
-    const key = this.getPkgKey()
-    return this.pkg[key] || []
-  }
-
   getRepositoryKey() {
     return "topics"
+  }
+
+  getRepositoryValue() {
+    const key = this.getRepositoryKey()
+    return this.repository[key].length > 0 ? this.repository[key] : undefined
   }
 
   /**

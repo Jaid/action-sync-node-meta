@@ -101,16 +101,18 @@ async function main() {
       syncFailed = true
     }
   }
-  const changedResults = results.filter(result => {
-    if (!result.enabled) {
-      return false
-    }
-    if (result.isEqual) {
-      return false
-    }
-    return true
-  })
-  if (overwriteFile && hasContent(changedResults)) {
+  const isChanged = overwriteFile
+    ? !isEqual(originalPkg, pkg)
+    : results.filter(result => {
+      if (!result.enabled) {
+        return false
+      }
+      if (result.isEqual) {
+        return false
+      }
+      return true
+    })
+  if (overwriteFile && isChanged) {
     const indent = detectIndent(pkgString).indent || "    "
     const outputJson = JSON.stringify(pkg, null, indent)
     await fsp.outputFile(pkgFile, outputJson)
