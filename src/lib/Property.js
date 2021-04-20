@@ -80,11 +80,10 @@ export default class Property {
   }
 
   /**
-   * @return {*}
+   * @return {string}
    */
-  getPkgValue() {
-    const key = this.getPkgKey()
-    return this.pkg[key]
+   getPkgValue() {
+    throw new Error("This must be implemented by child class")
   }
 
   /**
@@ -126,7 +125,11 @@ export default class Property {
   applyPkgUpdate(pkgBefore, repositoryValue) {
     const pkgKey = this.getPkgKey()
     return immer(pkgBefore, state => {
-      state[pkgKey] = repositoryValue
+      if (["", undefined, null].includes(repositoryValue)) {
+        delete state[pkgKey]
+      } else {
+        state[pkgKey] = repositoryValue
+      }
     })
   }
 

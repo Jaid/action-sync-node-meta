@@ -8,6 +8,11 @@ export default class HomepageProperty extends Property {
     return "homepage"
   }
 
+  getPkgValue() {
+    const key = this.getPkgKey()
+    return this.pkg[key] || ''
+  }
+
   shouldSkip() {
     const syncHomepage = getActionBooleanInput("syncHomepage")
     if (!syncHomepage) {

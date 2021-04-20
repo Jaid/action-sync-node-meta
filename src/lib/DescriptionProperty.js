@@ -8,6 +8,11 @@ export default class DescriptionProperty extends Property {
     return "description"
   }
 
+  getPkgValue() {
+    const key = this.getPkgKey()
+    return this.pkg[key] || ''
+  }
+
   shouldSkip() {
     const syncDescription = getActionBooleanInput("syncDescription")
     if (!syncDescription) {
