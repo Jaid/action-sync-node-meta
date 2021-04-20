@@ -42,8 +42,7 @@ async function main() {
     info("No package.json found, skipping")
     return
   }
-  const originalPkg = JSON.parse(pkgString)
-  let pkg = originalPkg
+  let pkg = JSON.parse(pkgString)
   debug(`Loaded ${zahl(pkg, "field")} from ${pkgFile}`)
   if (!context?.payload?.repository) {
     throw new Error("Could not fetch repository info from context.payload.repository")
@@ -101,7 +100,7 @@ async function main() {
       syncFailed = true
     }
   }
-  const isChanged = results.filter(result => {
+  const changedResults = results.filter(result => {
     if (!result.enabled) {
       return false
     }
@@ -110,7 +109,7 @@ async function main() {
     }
     return true
   })
-  if (overwriteFile && isChanged) {
+  if (overwriteFile && hasContent(changedResults)) {
     const indent = detectIndent(pkgString).indent || "    "
     const outputJson = JSON.stringify(pkg, null, indent)
     await fsp.outputFile(pkgFile, outputJson)
