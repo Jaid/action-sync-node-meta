@@ -101,17 +101,15 @@ async function main() {
       syncFailed = true
     }
   }
-  const isChanged = overwriteFile
-    ? !isEqual(originalPkg, pkg)
-    : results.filter(result => {
-      if (!result.enabled) {
-        return false
-      }
-      if (result.isEqual) {
-        return false
-      }
-      return true
-    })
+  const isChanged = results.filter(result => {
+    if (!result.enabled) {
+      return false
+    }
+    if (result.isEqual) {
+      return false
+    }
+    return true
+  })
   if (overwriteFile && isChanged) {
     const indent = detectIndent(pkgString).indent || "    "
     const outputJson = JSON.stringify(pkg, null, indent)
