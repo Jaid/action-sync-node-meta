@@ -27,5 +27,6 @@ dist
 temp
 
 # IDEs
+/debug.log
 /.vscode/
 /.idea/
