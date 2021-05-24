@@ -3,7 +3,7 @@
 Example workflow that runs whenever commits are pushed on branch `master`.  
 This will overwrite the `package.json` file if it differs from the GitHub repository info.
 
-This is the recommended syncing direction, because of the more simple setup (no need to manually add a secret to the repository settings) and the adventages of git commits (better monitoring, revertability).
+This is the recommended syncing direction, because of the more simple setup (no need to manually add a secret to the repository settings) and the advantages of git commits (better monitoring, revertability).
 
 `.github/workflows/example.yml`
 ```yaml
