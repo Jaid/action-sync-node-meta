@@ -21,7 +21,7 @@ import pullBody from "./pullBody.hbs"
 const githubToken = getInput("githubToken", {required: true})
 const octokit = getOctokit(githubToken, {
   previews: ["mercy"], // mercy preview gives us topics
-})
+}).rest
 
 async function main() {
   let syncFailed = false
