@@ -82,9 +82,47 @@ jobs:
 
 <details>
 <summary>Detailed setup</summary>
-Go to your account settings.
+Go to your account settings and then to “Developer settings”.
 
-![Step 1](readme/tokenSteps/01.png)
+![Token setup: Step 1](readme/tokenSteps/01.png)
+
+Go to “Personal access tokens”.
+
+![Token setup: Step 2](readme/tokenSteps/02.png)
+
+Click “Generate new token”.
+
+![Token setup: Step 3](readme/tokenSteps/03.png)
+
+Give it a good title, so you still know what your token does in one year. Add „repo“ permissions.
+
+![Token setup: Step 4](readme/tokenSteps/04.png)
+
+Copy the generated token.
+
+![Token setup: Step 5](readme/tokenSteps/05.png)
+
+Go to the repository that uses action-sync-node-meta. Go to “Settings”, “Secrets”.
+
+![Token setup: Step 6](readme/tokenSteps/06.png)
+
+Click “New repository secret”.
+
+![Token setup: Step 7](readme/tokenSteps/07.png)
+
+Add the secret token from your clipboard. Name the token “repoGithubToken” or anything you like.
+
+![Token setup: Step 8](readme/tokenSteps/08.png)
+
+Now pass the token to action-sync-node-meta in your workflow file.
+
+```yaml
+- name: Jaid/action-sync-node-meta
+  uses: jaid/action-sync-node-meta@v1.4.0
+  with:
+    direction: overwrite-github
+    githubToken: ${{ secrets.“repoGithubToken” }}
+```
 
 </details>
 
