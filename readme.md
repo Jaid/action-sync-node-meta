@@ -113,7 +113,7 @@ Now pass the token to action-sync-node-meta in your workflow file.
   uses: jaid/action-sync-node-meta@v1.4.0
   with:
     direction: overwrite-github
-    githubToken: ${{ secrets.“repoGithubToken” }}
+    githubToken: ${{ secrets.repoGithubToken }}
 ```
 
 </details>
@@ -159,6 +159,12 @@ Now pass the token to action-sync-node-meta in your workflow file.
 <td></td>
 <td>overwrite-file</td>
 <td>The syncing direction, can be "overwrite-file" or "overwrite-github". If "overwrite-file", the file package.json will be edited in a pull request according to the GitHub repository info. If "overwrite-github", the GitHub repository info will be changed according to the content of the package.json file.</td>
+</tr>
+<tr>
+<td>jsonFinalNewline</td>
+<td></td>
+<td>true</td>
+<td>If true and direction is "overwrite-file", the updated package.json will have a final newline.</td>
 </tr>
 <tr>
 <td>removeBranch</td>

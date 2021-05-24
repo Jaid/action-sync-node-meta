@@ -3,6 +3,7 @@ import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/c
 import {context, GitHub} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
+import getActionBooleanInput from "get-boolean-action-input"
 import hasContent from "has-content"
 import path from "path"
 import purdy from "purdy"
@@ -108,8 +109,10 @@ async function main() {
   })
   if (overwriteFile && hasContent(changedResults)) {
     const indent = detectIndent(pkgString).indent || "    "
-    const outputJson = JSON.stringify(pkg, null, indent)
-    await fsp.outputFile(pkgFile, outputJson)
+    const json = JSON.stringify(pkg, null, indent)
+    const jsonFinalNewline = getActionBooleanInput("jsonFinalNewline")
+    const newContent = jsonFinalNewline ? `${json}\n` : json
+    await fsp.outputFile(pkgFile, newContent)
     const prefix = getInput("commitMessagePrefix") || ""
     const changesString = changedResults.map(result => result.pkgKey).join(", ")
     let commitManager
