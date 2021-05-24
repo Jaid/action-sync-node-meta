@@ -179,7 +179,7 @@ async function main() {
   }
 }
 
-info(`${_PKG_NAME} v${_PKG_VERSION}`)
+info(`${process.env.REPLACE_PKG_NAME} v${process.env.REPLACE_PKG_VERSION}`)
 
 main().catch(error => {
   setFailed("jaid/action-sync-node-meta threw an Error")
