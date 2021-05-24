@@ -56,3 +56,9 @@ jobs:
           direction: overwrite-github
           githubToken: ${{ secrets.customGithubToken }}
 ```
+
+<details>
+<summary>Detailed setup</summary>
+Go to your account settings.
+![Step 1](readme/tokenSteps/01.png)
+</details>
