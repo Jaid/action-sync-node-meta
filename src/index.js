@@ -119,6 +119,7 @@ async function main() {
         autoRemoveBranch: "removeBranch",
         branch: "action-sync-node-meta",
         pullRequestTitle: "Applied a fix from action-sync-node-meta",
+        commitMessage: `${prefix}Updated package.json[${changesString}]`,
         pullRequestBody: manager => pullBody({
           ...context.repo,
           sha7: context.sha?.slice(0, 8),
@@ -130,7 +131,7 @@ async function main() {
         }),
         mergeMessage: manager => `Automatically merged Node metadata update from #${manager.pullNumber}`,
       })
-      await commitManager.push(`${prefix}Updated package.json[${changesString}]`)
+      await commitManager.push()
     } catch (error) {
       logError(error)
       syncFailed = true
