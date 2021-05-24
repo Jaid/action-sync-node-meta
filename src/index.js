@@ -44,9 +44,6 @@ async function main() {
   }
   let pkg = JSON.parse(pkgString)
   debug(`Loaded ${zahl(pkg, "field")} from ${pkgFile}`)
-  if (!context?.payload?.repository) {
-    throw new Error("Could not fetch repository info from context.payload.repository")
-  }
   /**
    * @type {import("lib/Property").Repository}
    */
