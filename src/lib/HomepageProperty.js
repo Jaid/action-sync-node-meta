@@ -8,6 +8,11 @@ export default class HomepageProperty extends Property {
     return "homepage"
   }
 
+  getRepositoryValue() {
+    const key = this.getRepositoryKey()
+    return this.repository[key] || undefined
+  }
+
   shouldSkip() {
     const syncHomepage = getActionBooleanInput("syncHomepage")
     if (!syncHomepage) {

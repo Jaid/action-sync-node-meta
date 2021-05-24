@@ -8,6 +8,11 @@ export default class DescriptionProperty extends Property {
     return "description"
   }
 
+  getRepositoryValue() {
+    const key = this.getRepositoryKey()
+    return this.repository[key] || undefined
+  }
+
   shouldSkip() {
     const syncDescription = getActionBooleanInput("syncDescription")
     if (!syncDescription) {

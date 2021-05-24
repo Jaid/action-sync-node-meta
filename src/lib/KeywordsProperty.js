@@ -14,6 +14,11 @@ export default class KeywordsProperty extends Property {
     return "topics"
   }
 
+  getRepositoryValue() {
+    const key = this.getRepositoryKey()
+    return this.repository[key].length > 0 ? this.repository[key] : undefined
+  }
+
   /**
    * @param {*} pkgValue
    * @param {*} repositoryValue
