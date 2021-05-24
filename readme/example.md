@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: actions/checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: actions/setup-node
-        uses: actions/setup-node@v1.4.1
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: "13.9.0"
+          node-version: "16.2.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.4.0
         with:
@@ -45,11 +45,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: actions/checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: actions/setup-node
-        uses: actions/setup-node@v1.4.1
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: "13.9.0"
+          node-version: "16.2.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.4.0
         with:
