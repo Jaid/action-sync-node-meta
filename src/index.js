@@ -1,6 +1,6 @@
 import fsp from "@absolunet/fsp"
 import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/core"
-import github, {context} from "@actions/github"
+import {context, getOctokit} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
 import getActionBooleanInput from "get-boolean-action-input"
@@ -19,7 +19,7 @@ import logError from "lib/logError"
 import pullBody from "./pullBody.hbs"
 
 const githubToken = getInput("githubToken", {required: true})
-const octokit = github.getOctokit(githubToken, {
+const octokit = getOctokit(githubToken, {
   previews: ["mercy"], // mercy preview gives us topics
 })
 
