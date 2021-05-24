@@ -26,7 +26,7 @@ There are values that are meant to be the same. Why not automatically keep them 
 Example workflow that runs whenever commits are pushed on branch `master`.  
 This will overwrite the `package.json` file if it differs from the GitHub repository info.
 
-This is the recommended syncing direction, because of the more simple setup (no need to manually add a secret to the repository settings) and the adventages of git commits (better monitoring, revertability).
+This is the recommended syncing direction, because of the more simple setup (no need to manually add a secret to the repository settings) and the advantages of git commits (better monitoring, revertability).
 
 `.github/workflows/example.yml`
 ```yaml
@@ -39,11 +39,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: actions/checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: actions/setup-node
-        uses: actions/setup-node@v1.4.1
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: "13.9.0"
+          node-version: "16.2.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.4.0
         with:
@@ -68,11 +68,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: actions/checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: actions/setup-node
-        uses: actions/setup-node@v1.4.1
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: "13.9.0"
+          node-version: "16.2.0"
       - name: Jaid/action-sync-node-meta
         uses: jaid/action-sync-node-meta@v1.4.0
         with:
@@ -157,6 +157,8 @@ jobs:
 
 
 
+
+
 ## Development
 
 
@@ -172,3 +174,8 @@ npm install
 ## License
 [MIT License](https://raw.githubusercontent.com/jaid/action-sync-node-meta/master/license.txt)  
 Copyright © 2020, Jaid \<jaid.jsx@gmail.com> (https://github.com/jaid)
+
+<!---
+Readme generated with tldw v7.0.0
+https://github.com/Jaid/tldw
+-->
