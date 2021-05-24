@@ -98,7 +98,7 @@ Now pass the token to action-sync-node-meta in your workflow file.
   uses: jaid/action-sync-node-meta@v1.4.0
   with:
     direction: overwrite-github
-    githubToken: ${{ secrets.“repoGithubToken” }}
+    githubToken: ${{ secrets.repoGithubToken }}
 ```
 
 </details>
