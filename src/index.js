@@ -21,6 +21,7 @@ import logError from "lib/logError"
 import pullBody from "./pullBody.hbs"
 
 const githubToken = getInput("githubToken", {required: true})
+// TODO Is preview mercy still needed? It was needed in April 2020.
 const octokit = getOctokit(githubToken, {
   previews: ["mercy"], // mercy preview gives us topics
 }).rest
