@@ -13,6 +13,7 @@ import zahl from "zahl"
 import chalk from "lib/chalk"
 import DescriptionProperty from "lib/DescriptionProperty"
 import getBranchName from "lib/getBranchName"
+import getCommitMessage from "lib/getCommitMessage"
 import HomepageProperty from "lib/HomepageProperty"
 import KeywordsProperty from "lib/KeywordsProperty"
 import logError from "lib/logError"
@@ -115,8 +116,7 @@ async function main() {
     const jsonFinalNewline = getActionBooleanInput("jsonFinalNewline")
     const newContent = jsonFinalNewline ? `${json}\n` : json
     await fsp.outputFile(pkgFile, newContent)
-    const prefix = getInput("commitMessagePrefix") || ""
-    const changesString = changedResults.map(result => result.pkgKey).join(", ")
+    const changedKeys = changedResults.map(result => result.pkgKey)
     let commitManager
     try {
       commitManager = new CommitManager({
@@ -124,7 +124,7 @@ async function main() {
         autoRemoveBranch: "removeBranch",
         branch: getBranchName(),
         pullRequestTitle: "Applied a fix from action-sync-node-meta",
-        commitMessage: `${prefix}Updated package.json[${changesString}]`,
+        commitMessage: getCommitMessage(changedKeys),
         pullRequestBody: manager => pullBody({
           ...context.repo,
           sha7: context.sha?.slice(0, 8),

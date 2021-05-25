@@ -19,9 +19,9 @@ inputs:
     description: If true and direction is "overwrite-file" and approve is also true, automatically merged pull requests will delete their branch afterwards.
     default: "true"
     required: false
-  commitMessagePrefix:
-    description: Prefix string used in messages for automatically generated commits
-    default: "autofix: "
+  commitMessage:
+    description: Commit message for package.json changes (only for direction "overwrite-file"). Substring “{changes}” will be replaced with a list of changed package.json fields.
+    default: "autofix: Updated package.json[{changes}]"
     required: false
   syncDescription:
     description: If true, package.json[description] will be synced with GitHub repository description.
@@ -44,6 +44,6 @@ inputs:
     default: "true"
     required: false
   branch:
-    description: The name of the branch to make changes on (only for direction "overwrite-file").
+    description: The name of the branch to make changes on (only for direction "overwrite-file"). Substring “{random}” will be replaced with randomized characters.
     default: action-sync-node-meta
     required: false

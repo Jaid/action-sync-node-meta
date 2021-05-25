@@ -149,10 +149,16 @@ Now pass the token to action-sync-node-meta in your workflow file.
 <td>If true and direction is "overwrite-file", pull requests created by this action are automatically approved and merged.</td>
 </tr>
 <tr>
-<td>commitMessagePrefix</td>
+<td>branch</td>
 <td></td>
-<td>autofix: </td>
-<td>Prefix string used in messages for automatically generated commits</td>
+<td>action-sync-node-meta</td>
+<td>The name of the branch to make changes on (only for direction "overwrite-file"). Substring “{random}” will be replaced with randomized characters.</td>
+</tr>
+<tr>
+<td>commitMessage</td>
+<td></td>
+<td>autofix: Updated package.json[{changes}]</td>
+<td>Commit message for package.json changes (only for direction "overwrite-file"). Substring “{changes}” will be replaced with a list of changed package.json fields.</td>
 </tr>
 <tr>
 <td>direction</td>
@@ -218,7 +224,7 @@ npm install
 
 ## License
 [MIT License](https://raw.githubusercontent.com/jaid/action-sync-node-meta/master/license.txt)  
-Copyright © 2020, Jaid \<jaid.jsx@gmail.com> (https://github.com/jaid)
+Copyright © 2021, Jaid \<jaid.jsx@gmail.com> (https://github.com/jaid)
 
 <!---
 Readme generated with tldw v7.0.0
