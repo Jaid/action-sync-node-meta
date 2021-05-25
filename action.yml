@@ -43,3 +43,7 @@ inputs:
     description: If true and direction is "overwrite-file", the updated package.json will have a final newline.
     default: "true"
     required: false
+  branch:
+    description: The name of the branch to make changes on (only for direction "overwrite-file").
+    default: action-sync-node-meta
+    required: false

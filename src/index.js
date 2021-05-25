@@ -12,6 +12,7 @@ import zahl from "zahl"
 
 import chalk from "lib/chalk"
 import DescriptionProperty from "lib/DescriptionProperty"
+import getBranchName from "lib/getBranchName"
 import HomepageProperty from "lib/HomepageProperty"
 import KeywordsProperty from "lib/KeywordsProperty"
 import logError from "lib/logError"
@@ -121,7 +122,7 @@ async function main() {
       commitManager = new CommitManager({
         autoApprove: "approve",
         autoRemoveBranch: "removeBranch",
-        branch: "action-sync-node-meta",
+        branch: getBranchName(),
         pullRequestTitle: "Applied a fix from action-sync-node-meta",
         commitMessage: `${prefix}Updated package.json[${changesString}]`,
         pullRequestBody: manager => pullBody({
