@@ -1,3 +1,5 @@
+import path from "node:path"
+
 import fsp from "@absolunet/fsp"
 import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/core"
 import {context, getOctokit} from "@actions/github"
@@ -5,7 +7,6 @@ import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
 import getActionBooleanInput from "get-boolean-action-input"
 import hasContent from "has-content"
-import path from "path"
 import purdy from "purdy"
 import readFileString from "read-file-string"
 import zahl from "zahl"
