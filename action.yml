@@ -2,7 +2,7 @@ name: Sync package.json with repo info
 description: GitHub Action that syncs package.json wpository metadata (description, homepage, topics/keywords).
 author: Jaid
 runs:
-  using: node12
+  using: node16
   main: build/index.js
 branding:
   icon: refresh-cw
