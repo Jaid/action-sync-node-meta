@@ -21,7 +21,6 @@
     "zahl": "^2.0.6"
   },
   "devDependencies": {
-    "acorn": "^8.7.1",
     "babel-preset-jaid": "^14.0.0",
     "browserslist-config-jaid-node": "^3.0.0",
     "eslint": "^8.16.0",
