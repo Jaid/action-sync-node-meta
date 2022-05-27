@@ -1,4 +1,4 @@
-import getActionBooleanInput from "get-boolean-action-input"
+import getActionBooleanInput from "./lib/esm/get-boolean-action-input.js"
 
 import Property from "./Property.js"
 

@@ -5,7 +5,7 @@ import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/c
 import {context, getOctokit} from "@actions/github"
 import CommitManager from "commit-from-action"
 import detectIndent from "detect-indent"
-import getActionBooleanInput from "get-boolean-action-input"
+import getActionBooleanInput from "./lib/esm/get-boolean-action-input.js"
 import hasContent from "./lib/esm/has-content.js"
 import purdy from "purdy"
 import readFileString from "read-file-string"
