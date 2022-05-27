@@ -11,14 +11,13 @@ import purdy from "purdy"
 import readFileString from "read-file-string"
 import zahl from "zahl"
 
-import chalk from "lib/chalk"
-import DescriptionProperty from "lib/DescriptionProperty"
-import getBranchName from "lib/getBranchName"
-import getCommitMessage from "lib/getCommitMessage"
-import HomepageProperty from "lib/HomepageProperty"
-import KeywordsProperty from "lib/KeywordsProperty"
-import logError from "lib/logError"
-
+import chalk from "./lib/chalk.js"
+import DescriptionProperty from "./lib/DescriptionProperty.js"
+import getBranchName from "./lib/getBranchName.js"
+import getCommitMessage from "./lib/getCommitMessage.js"
+import HomepageProperty from "./lib/HomepageProperty.js"
+import KeywordsProperty from "./lib/KeywordsProperty.js"
+import logError from "./lib/logError.js"
 import pullBody from "./pullBody.hbs"
 
 const githubToken = getInput("githubToken", {required: true})

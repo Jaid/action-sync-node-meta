@@ -1,8 +1,8 @@
 import getActionBooleanInput from "get-boolean-action-input"
 import {isEqual} from "lodash"
 
-import normalizeArray from "lib/normalizeArray"
-import Property from "lib/Property"
+import normalizeArray from "./normalizeArray.js"
+import Property from "./Property.js"
 
 export default class KeywordsProperty extends Property {
 

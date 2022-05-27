@@ -1,6 +1,6 @@
 import getActionBooleanInput from "get-boolean-action-input"
 
-import Property from "lib/Property"
+import Property from "./Property.js"
 
 export default class HomepageProperty extends Property {
 
