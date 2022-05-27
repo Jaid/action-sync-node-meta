@@ -9,7 +9,7 @@ import getActionBooleanInput from "get-boolean-action-input"
 import hasContent from "has-content"
 import purdy from "purdy"
 import readFileString from "read-file-string"
-import zahl from "zahl"
+import zahl from "./lib/esm/zahl.js"
 
 import chalk from "./lib/chalk.js"
 import DescriptionProperty from "./lib/DescriptionProperty.js"
