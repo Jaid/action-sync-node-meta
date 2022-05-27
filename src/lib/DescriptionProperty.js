@@ -1,5 +1,4 @@
 import getActionBooleanInput from "./lib/esm/get-boolean-action-input.js"
-
 import Property from "./Property.js"
 
 export default class DescriptionProperty extends Property {

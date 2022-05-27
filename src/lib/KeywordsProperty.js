@@ -1,6 +1,6 @@
-import getActionBooleanInput from "./lib/esm/get-boolean-action-input.js"
 import {isEqual} from "lodash"
 
+import getActionBooleanInput from "./lib/esm/get-boolean-action-input.js"
 import normalizeArray from "./normalizeArray.js"
 import Property from "./Property.js"
 
