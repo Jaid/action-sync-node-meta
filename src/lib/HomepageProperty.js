@@ -1,4 +1,4 @@
-import getActionBooleanInput from "./lib/esm/get-boolean-action-input.js"
+import getActionBooleanInput from "./esm/get-boolean-action-input.js"
 import Property from "./Property.js"
 
 export default class HomepageProperty extends Property {
