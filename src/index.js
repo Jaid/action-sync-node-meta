@@ -5,7 +5,7 @@ import {debug, endGroup, getInput, info, setFailed, startGroup} from "@actions/c
 import {context, getOctokit} from "@actions/github"
 import detectIndent from "detect-indent"
 import purdy from "purdy"
-import readFileString from "read-file-string"
+import readFileString from "./lib/esm/read-file-string.js"
 
 import chalk from "./lib/chalk.js"
 import DescriptionProperty from "./lib/DescriptionProperty.js"
