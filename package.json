@@ -29,7 +29,7 @@
     "webpack-config-jaid": "^16.1.1"
   },
   "scripts": {
-    "build": "rm -rf build && NODE_ENV=development webpack",
+    "build": "rm -rf build && NODE_ENV=production webpack",
     "buildPush": "npm run build && git add build && git-flush-cli 'Rebuilt src/'",
     "testOnGithub": "name=$(package-name-cli) && git-flush-cli 'Testing changes' && npm run buildPush && cd ../test && git pull && echo $(date-now) >> changefile.txt && git-flush-cli \"Random commit for testing action Jaid/$name\" && cd ../$name",
     "prepareRelease": "npm run buildPush",
