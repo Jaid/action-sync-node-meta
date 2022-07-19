@@ -55,7 +55,7 @@ The secret `customGithubToken` is forwarded to the input `githubToken`. It has t
 
 `.github/workflows/example2.yml`
 ```yaml
-name: Sync repository info with package.json
+name: Sync repository info from package.json
 on:
   push:
     branches: [master]
